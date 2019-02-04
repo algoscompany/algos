@@ -10,6 +10,7 @@ class DbProvider implements DbProviderInterface {
      */
     
     private static $instance;
+    private $connection;
     
     private function __construct(){
         
@@ -35,9 +36,17 @@ class DbProvider implements DbProviderInterface {
     }
 
     public function select(Entity $T, array $whereclause): array {
+        $var = "SELECT " . $this->formatColmn($T . getColumnName());
+        $var .= " FROM " . $T.getTableName();
+        $var .= " WHERE ";
+        foreach ($c as $whereclause){
+            $var .= $c . " AND ";
+        }
+        var $sql = substr($var, 0, - 4);    //elimina l'AND finale
     }
 
     public function save(Entity $obj): bool {
+        
     }
 
     public function update(Entity $obj): bool {
