@@ -43,7 +43,7 @@ class DbProvider implements DbProviderInterface {
         }
         return substr($res, 0, - 1); // elimina l'ultima virgola
     }
-
+    
     public function select(Entity $T): Entity {
         $var = "SELECT " . $this->formatColmn($T->getColumnName());
         $var .= " FROM " . $T->getTableName();
@@ -52,7 +52,7 @@ class DbProvider implements DbProviderInterface {
         return $res->fetch_object($T->getClassName());
     }
 
-    public function select(Entity $T, array $whereclause): array {
+    public function selectWhereClause(Entity $T, array $whereclause) : bool{
         $var = "SELECT " . $this->formatColmn($T->getColumnName());
         $var .= " FROM " . $T->getTableName();
         $var .= " WHERE ";
