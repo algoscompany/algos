@@ -1,13 +1,15 @@
 <?php
 namespace algos\server\config;
 
+require_once __DIR__ . '/../required/autoload.php';
+
 class Configuration {
-    private $instance;
-    private $confFile = "config.ini";
+    private static $instance;
+    private $confFile = __DIR__ . "\config.ini";
     private $conf;
     
     private function __construct(){
-        $conf = parse_ini_file($confFile);     
+        $this->conf = parse_ini_file($this->confFile);     
     }
     
     public function instance(): Configuration{
@@ -23,8 +25,8 @@ class Configuration {
             return null;
     }
     
-    public function reloadConfig(): void{
-        unset($this);
+    public static function reloadConfig(): void{
+        Configuration::$instance = NULL;
     }
 }
 

@@ -7,7 +7,7 @@ interface DbProviderInterface {
 
     public function select(Entity $T): Entity;
 
-    public function select(Entity $T, array $whereclause): array;
+    public function selectWhereClause(Entity $T, array $whereclause): array;
 
     public function save(Entity $obj): bool;
 

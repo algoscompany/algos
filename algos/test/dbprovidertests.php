@@ -2,4 +2,6 @@
    
 use algos\server\dbprovider\DbProvider;
 
-DbProvider::instance()->select("Entity");
+require_once '..\server\dbprovider\DbProvider.php';
+
+DbProvider::instance();

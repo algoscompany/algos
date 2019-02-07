@@ -1,10 +1,12 @@
 <?php
 namespace algos\server\dbprovider;
 
+use algos\server\config\Configuration;
 use algos\server\entity\Entity;
 use Exception;
 use mysqli;
-use algos\server\config\Configuration;
+
+require_once __DIR__ . '/../required/autoload.php';
 
 class DbProvider implements DbProviderInterface {
 
@@ -52,7 +54,7 @@ class DbProvider implements DbProviderInterface {
         return $res->fetch_object($T->getClassName());
     }
 
-    public function selectWhereClause(Entity $T, array $whereclause) : bool{
+    public function selectWhereClause(Entity $T, array $whereclause) : array{
         $var = "SELECT " . $this->formatColmn($T->getColumnName());
         $var .= " FROM " . $T->getTableName();
         $var .= " WHERE ";
