@@ -82,13 +82,19 @@ class Utente extends Entity
     }
     public function getTableName(): string
     {
-        
+        return Utente::TABLENAME;
     }
 
-    public function getColumn(): array
+    public function getColumn(): array{
     {
-        
+        return array(
+            "username" => $this->username,
+            "nome" => $this->nome,
+            "cognome" => $this->cognome,
+            "password" => $this->password,
+            "mediaRisposte" => $this->mediaRisposte
+        );
+     }
     }
-
 }
 
