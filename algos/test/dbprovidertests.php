@@ -2,6 +2,10 @@
    
 use algos\server\dbprovider\DbProvider;
 
-require_once '..\server\dbprovider\DbProvider.php';
+require_once __DIR__ . '\..\server\dbprovider\DbProvider.php';
 
-DbProvider::instance();
+try{
+    DbProvider::instance();
+}catch(Exception $e){
+    echo $e->getMessage();
+}
