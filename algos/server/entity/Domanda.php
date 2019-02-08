@@ -1,6 +1,8 @@
 <?php
 namespace algos\server\entity;
 
+require_once __DIR__ . '/../required/autoload.php';
+
 class Domanda extends Entity {
 
     private const TABLENAME = "Domanda";
@@ -10,12 +12,6 @@ class Domanda extends Entity {
     private $domanda;
 
     public function __construct(string $domanda) {
-        $this->domanda = $domanda;
-    }
-
-    public function __construct(int $idDomanda, string $domanda) {
-        $this->idDomanda = $idDomanda;
-        
         $this->domanda = $domanda;
     }
 

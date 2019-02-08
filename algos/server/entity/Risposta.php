@@ -3,6 +3,8 @@ namespace algos\server\entity;
 
 use DateTime;
 
+require_once __DIR__ . '/../required/autoload.php';
+
 class Risposta extends Entity {
 
     private const TABLENAME = "Risposta";
@@ -19,18 +21,17 @@ class Risposta extends Entity {
 
     private $punteggio;
 
-    public function __construct(domanda $domanda, int $utente) {
-        $this->domanda = $domanda;
-        $this->idUtente = $utente;
+    public function __construct(int $idDomanda, int $idUtente) {
+        $this->idDomanda = $idDomanda;
+        $this->idUtente = $idUtente;
+        $this->data = new DateTime("now");
     }
 
-    public function __construct(DateTime $data, int $iDdomanda, int $idUtente,
-        domanda $domanda, Utente $utente, int $punteggio) {
+    public function __construct(DateTime $data, int $idDomanda, int $idUtente,
+        int $punteggio) {
         $this->data = $data;
-        $this->iDdomanda = $iDdomanda;
+        $this->idDomanda = $idDomanda;
         $this->idUtente = $idUtente;
-        $this->domanda = $domanda;
-        $this->utente = $utente;
         $this->punteggio = $punteggio;
     }
 
@@ -39,10 +40,14 @@ class Risposta extends Entity {
     }
 
     public function getDomanda(): Domanda {
+        //TODO if ($this->domanda == NULL)
+            //recupera da factory
         return $this->domanda;
     }
 
     public function getUtente(): Utente {
+        //TODO if ($this->utente == NULL)
+        //recupera da factory
         return $this->utente;
     }
 

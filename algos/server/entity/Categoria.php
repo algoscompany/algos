@@ -1,6 +1,8 @@
 <?php
 namespace algos\server\entity;
 
+require_once __DIR__ . '/../required/autoload.php';
+
 class Categoria extends Entity {
 
     private const TABLENAME = "Categoria";

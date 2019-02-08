@@ -1,6 +1,8 @@
 <?php
 namespace algos\server\entity;
 
+require_once __DIR__ . '/../required/autoload.php';
+
 class Notizia extends Entity {
 
     private const TABLENAME = "Notizia";
@@ -19,28 +21,35 @@ class Notizia extends Entity {
 
     private $idDomanda;
 
+    private $suggest;       //suggerimento o musica
+
+    private $link;
+
     private $categoria;
 
     private $domanda;
 
-    private $type;
-
-    private $link;
-
     public function __construct(string $titolo, int $punteggio, int $idCategoria,
-        int $idCategoria) {
+        int $idDomanda) {
         $this->titolo = $titolo;
         $this->punteggio = $punteggio;
         $this->tidCategoria = $idCategoria;
         $this->idDomanda = $idDomanda;
     }
 
-    public function __construct(int $idNotizia, string $titolo, string $corpo,
-        string $fonte, int $punteggio, int $idCategoria, int $idCategoria) {
-        $this->idNotizia = $idNotizia;
+    public function __construct(string $titolo, string $corpo, string $fonte,
+        int $punteggio, int $idCategoria, int $idDomanda) {
         $this->titolo = $titolo;
         $this->corpo = $corpo;
         $this->fonte = $fonte;
+        $this->punteggio = $punteggio;
+        $this->tidCategoria = $idCategoria;
+        $this->idDomanda = $idDomanda;
+    }
+
+    public function __construct(string $titolo, string $link, int $punteggio,
+        int $idCategoria, int $idDomanda) {
+        $this->titolo = $titolo;
         $this->punteggio = $punteggio;
         $this->tidCategoria = $idCategoria;
         $this->idDomanda = $idDomanda;
@@ -59,7 +68,8 @@ class Notizia extends Entity {
     }
 
     public function setCorpo($corpo) {
-        $this->corpo = $corpo;
+        if ($this->isSuggest())
+            $this->corpo = $corpo;
     }
 
     public function getFonte() {
@@ -67,7 +77,8 @@ class Notizia extends Entity {
     }
 
     public function setFonte($fonte) {
-        $this->fonte = $fonte;
+        if ($this->isSuggest())
+            $this->fonte = $fonte;
     }
 
     public function getPunteggio() {
@@ -76,6 +87,19 @@ class Notizia extends Entity {
 
     public function setPunteggio($punteggio) {
         $this->punteggio = $punteggio;
+    }
+
+    public function isSuggest() {
+        return $this->type;
+    }
+
+    public function getLink() {
+        return $this->link;
+    }
+
+    public function setLink($link) {
+        if (! $this->isSuggest())
+            $this->link = $link;
     }
 
     public function getCategoria() {
@@ -94,18 +118,6 @@ class Notizia extends Entity {
         $this->domanda = $domanda;
     }
 
-    public function getType() {
-        return $this->type;
-    }
-
-    public function getLink() {
-        return $this->link;
-    }
-
-    public function setLink($link) {
-        $this->link = $link;
-    }
-
     public function getTableName(): string {
         return Notizia::TABLENAME;
     }
@@ -117,10 +129,10 @@ class Notizia extends Entity {
             "corpo" => $this->corpo,
             "fonte" => $this->fonte,
             "punteggio" => $this->punteggio,
+            "suggest" => $this->suggest,
+            "link" => $this->link,
             "idCategoria" => $this->idCategoria,
-            "idDomanda" => $this->idDomanda,
-            "type" => $this->type,
-            "link" => $this->link
+            "idDomanda" => $this->idDomanda
         );
     }
 }
