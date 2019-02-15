@@ -10,6 +10,8 @@ class Domanda extends Entity {
     private $idDomanda;
 
     private $domanda;
+    
+    private $visible;
 
     public function __construct(string $domanda) {
         $this->domanda = $domanda;
@@ -29,6 +31,14 @@ class Domanda extends Entity {
 
     public function setDomanda($domanda) {
         $this->domanda = $domanda;
+    }
+    
+    public function getVisible(): bool{
+        $this->visible;
+    }
+    
+    public function setVisible($visible): void{
+        $this->visible = $visible;
     }
 
     public function getTableName(): string {

@@ -16,6 +16,10 @@ class Utente extends Entity {
     private $password;
 
     private $eustress;
+    
+    private $risposte;
+    
+    private $token;
 
     public function __construct(string $username, string $password) {
         $this->username = $username;
@@ -93,6 +97,18 @@ class Utente extends Entity {
 
     public function getTableName(): string {
         return Utente::TABLENAME;
+    }
+    
+    public function getRisposte(): array{
+        return $this->risposte;
+    }
+    
+    public function getToken(): int{
+        return $this->token;
+    }
+    
+    public function increaseToken(): void{
+        $this->token++;
     }
 
     public function getColumn(): array {
