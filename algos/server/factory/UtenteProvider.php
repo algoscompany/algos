@@ -5,17 +5,17 @@ require_once __DIR__ . '/../required/autoload.php';
 
 session_start();
 
-class UtenteFactory extends AbstractFactory {
+class UtenteProvider extends AbstractProvider {
 
     private $instance;
 
     private function __construct() {
     }
 
-    public function instance() {
-        if (UtenteFactory::$instance == NULL)
-            UtenteFactory::$instance = new UtenteFactory();
-        return UtenteFactory::$instance;
+    public function instance(): UtenteProvider {
+        if (UtenteProvider::$instance == NULL)
+            UtenteProvider::$instance = new UtenteProvider();
+        return UtenteProvider::$instance;
     }
 
     public function registraUtente(string $username, string $nome, string $cognome, $password) {

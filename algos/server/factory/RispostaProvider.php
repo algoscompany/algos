@@ -5,17 +5,17 @@ use DateTime;
 
 require_once __DIR__ . '/../required/autoload.php';
 
-class RispostaFactory extends AbstractFactory {
+class RispostaProvider extends AbstractProvider {
 
     private $instance;
 
     private function __construct() {
     }
 
-    public function instance(): RispostaFactory {
-        if (RispostaFactory::$instance == NULL)
-            RispostaFactory::$instance = new RispostaFactory();
-        return RispostaFactory::$instance;
+    public function instance(): RispostaProvider {
+        if (RispostaProvider::$instance == NULL)
+            RispostaProvider::$instance = new RispostaProvider();
+        return RispostaProvider::$instance;
     }
 
     public function addRisposta(int $idDomanda, int $punteggio): bool{

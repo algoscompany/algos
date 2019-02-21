@@ -3,17 +3,17 @@ namespace algos\server\factory;
 
 require_once __DIR__ . '/../required/autoload.php';
 
-class DomandaFactory extends AbstractFactory {
+class DomandaProvider extends AbstractProvider {
 
     private $instance;
 
     private function __construct() {
     }
 
-    public function instance(): DomandaFactory {
-        if (DomandaFactory::$instance == NULL)
-            DomandaFactory::$instance = new DomandaFactory();
-        return DomandaFactory::$instance;
+    public function instance(): DomandaProvider {
+        if (DomandaProvider::$instance == NULL)
+            DomandaProvider::$instance = new DomandaProvider();
+        return DomandaProvider::$instance;
     }
     
     public function addDomanda(Domanda $domanda): bool {
