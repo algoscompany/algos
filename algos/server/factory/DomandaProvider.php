@@ -17,23 +17,26 @@ class DomandaProvider extends AbstractProvider {
     }
     
     public function addDomanda(Domanda $domanda): bool {
-        ;
+        return DbProvider::instance()->save($domanda);
     }
     
     public function getDomande(): array{
-        ;
+        return DbProvider::instance()->select(Domanda);
     }
     
     public function getDomanda(int $idDomanda): Domanda {
-        ;
+        return DbProvider::instance()->selectWhereClause(Domanda, 
+            array(
+                "idDomanda = $idDomanda"
+            ));
     }
     
     public function removeDomanda(Domanda $domanda): Domanda{
-        ;
+        return DbProvider::instance()->delete($domanda);
     }
     
     public function updateDomanda(Domanda $old, Domanda $new): void {
-        ;
+        //TODO;
     }
     
 }

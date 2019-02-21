@@ -18,20 +18,27 @@ class RispostaProvider extends AbstractProvider {
         return RispostaProvider::$instance;
     }
 
-    public function addRisposta(int $idDomanda, int $punteggio): bool{
-        ;
+    public function addRisposta(Domanda $domanda): bool{
+        return DbProvider::instance()->save($domanda);;
     }
     
     public function getRisposte(DateTime $datetime): array {
-        ;
+        return DbProvider::instance()->selectWhereClause(Risposta, 
+            array(
+                "data = ".$datetime->format("YYYY-mm-dd")
+            ));
     }
     
     public function getRisposta(int $idDomanda, DateTime $date): Risposta{
-        ;
+        return DbProvider::instance()->selectWhereClause(Risposta, 
+            array(
+                "idDomanda = $idDomanda",
+                "data = ".$date->format("YYYY-mm-dd")
+            ));
     }
     
     public function getEustress(): float{
-        ;
+        //TODO;
     }
 }
 
