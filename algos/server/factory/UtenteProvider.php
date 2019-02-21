@@ -18,12 +18,30 @@ class UtenteProvider extends AbstractProvider {
         return UtenteProvider::$instance;
     }
 
-    public function registraUtente(string $username, string $nome, string $cognome, $password) {
-        ;
+    public function registraUtente(string $email, string $nome, string $cognome,
+        string $password): bool {
+        $user = new Utente($email, $nome, md5($password));
+        if (DbProvider::instance()->save($user)) {
+            $_SESSION['user'] = $user;
+            return true;
+        }
+        return false;
     }
 
-    public function login(string $username, string $key): bool {
-        ;
+    public function login(string $email, string $key): bool {
+        $user = DbProvider::instance()->selectWhereClause(Utente,
+            array(
+
+                    "email = $email"
+            ));
+        if ($user != NULL) {
+            $keyS = $user->getEmail() . $user->getToken() . $user->getPassword();
+            if ($keyS === $key) {
+                $_SESSION['user'] = $user;
+                return true;
+            }
+        }
+        return false;
     }
 
     public function logout(): bool {
@@ -33,6 +51,29 @@ class UtenteProvider extends AbstractProvider {
     }
 
     public function cancellaUtente(): bool {
+        ;//TODO
+    }
+    
+    public function existEmail(string $email) {
+        $user = DbProvider::instance()->selectWhereClause(Utente, 
+            array(
+                "email = $email"
+            ));
+        return (($user != NULL) ? true : false);
+    }
+    
+    public function recoverPassword(string $email) : bool{
+        $reclink = DbProvider::instance()->selectWhereClause(RecoverLink,
+            array(
+                "idUtene = $email"
+            ));
+        if($reclink != NULL){
+            $reclink->getScadenza()//TODO finire scadenza < oggi
+        }
+        return false;
+    }
+    
+    public function resetPassword(string $email, string $key) {
         ;
     }
 }

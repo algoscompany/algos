@@ -36,12 +36,14 @@ class NotiziaProvider extends AbstractProvider {
 
     public function removeNotizia(int $id): Notizia {
         $not = $this->getNotizia($id);
+        $res = NULL;
         if(!NULL)
-            $res = DbProvider::instance()->delete()
+            $res = DbProvider::instance()->delete($not);
+        return $res;
     }
 
     public function updateNotizia($param): void {
-        ;
+        ;//TODO
     }
 }
 
