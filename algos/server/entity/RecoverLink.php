@@ -21,6 +21,15 @@ class RecoverLink extends Entity
         $this->idUtente = $idUtente;
     }
     
+    public function __construct(int $idUtente){
+        $this->idUtente = $idUtente;
+        $this->initRecoverLink();
+    }
+    
+    private function initRecoverLink(){
+        
+    }
+    
     public function getLink(): string
     {
         return $this->link;
