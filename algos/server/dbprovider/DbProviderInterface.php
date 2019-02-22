@@ -13,8 +13,6 @@ interface DbProviderInterface {
 
     public function update(Entity $obj): bool;
 
-//     public function saveOrUpdate(Entity $obj): bool;
-
     public function delete(Entity $obj): Entity;
 
     public function beginTransaction(): bool;

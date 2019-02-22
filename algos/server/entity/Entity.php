@@ -1,7 +1,8 @@
 <?php
 namespace algos\server\entity;
 
-class Entity {
+abstract class Entity {
+    abstract public function getTableName(): string;
+    abstract public function getColumn(): array;
     
 }
-
