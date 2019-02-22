@@ -62,8 +62,8 @@ class DbProvider implements DbProviderInterface {
             $var .= $c . " AND ";
         }
         $sql = substr($var, 0, - 4); // elimina l'AND finale
-        
-        $res = $this->connection->query($var);
+
+        $res = $this->connection->query($sql);
         $arr = array();
         while ($obj = $res->fetch_object($T->getClassName())) {
             $arr[] = $obj;
@@ -86,24 +86,15 @@ class DbProvider implements DbProviderInterface {
             return false;
     }
 
-    public function update(Entity $obj): bool {
-        $sql = "UPDATE " . $obj->getTableName() . " SET ";
-        foreach ($obj->getColumnName() as $c)
-            $sql .= $obj->$c;
+    public function update(Entity $old, Entity $new): bool {
+        $sql = "UPDATE " . $old->getTableName() . " SET ";
+        foreach ($old->getColumnName() as $c)
+            $sql .= $old->$c;
         $sql .= " WHERE ";
-        foreach ($obj->getColumnName() as $k => $v)
-            $sql .= $k . " = " . $obj->$v;
+        foreach ($new->getColumnName() as $k => $v)
+            $sql .= $k . " = " . $new->$v;
         
         return ($this->connection->query($sql) ? true : false);
-    }
-
-    public function saveOrUpdate(Entity $obj): bool {
-        if ($this->update($obj))
-            return true;
-        else if ($this->save($obj))
-            return true;
-        else
-            return false;
     }
 
     public function delete(Entity $obj): Entity {
