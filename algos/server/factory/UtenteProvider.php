@@ -1,6 +1,9 @@
 <?php
 namespace algos\server\factory;
 
+use algos\server\utility\Email;
+use DateTime;
+
 require_once __DIR__ . '/../required/autoload.php';
 
 session_start();
@@ -63,18 +66,23 @@ class UtenteProvider extends AbstractProvider {
     }
     
     public function recoverPassword(string $email) : bool{
-        $reclink = DbProvider::instance()->selectWhereClause(RecoverLink,
-            array(
-                "idUtene = $email"
-            ));
+        $reclink = new RecoverLink($email); 
         if($reclink != NULL){
-            $reclink->getScadenza()//TODO finire scadenza < oggi
+            $app = $reclink->getScadenza();
+            $now = new DateTime('now');
+            if($app>$now){
+                Email::sendEmail($_SESSION['user']->getEmail());
+            }
         }
         return false;
     }
     
-    public function resetPassword(string $email, string $key) {
-        ;
+    public function resetPassword(string $link, string $key) {
+       
+        $reclink = DbProvider::instance()->selectWhereClause(RecoverLink,
+            array(
+                "idUtene = $email"
+            ));
     }
 }
 
