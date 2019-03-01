@@ -2,6 +2,7 @@
 namespace algos\server\entity;
 
 require_once __DIR__ . '/../required/autoload.php';
+require_once __DIR__ . '/../required/method_overloader.php';
 
 class Utente extends Entity {
 
@@ -20,13 +21,19 @@ class Utente extends Entity {
     private $risposte;
     
     private $token;
+    
+    public function __construct($p1, $p2, $p3, $p4, $p5){
+        $args = func_get_args();
+        clear_array_args($args);
+        call_overload($this, $args, "__construct");
+    }
 
-    public function __construct(string $username, string $password) {
+    public function __construct0(string $username, string $password) {
         $this->username = $username;
         $this->password = $password;
     }
 
-    public function __construct(string $username, string $nome, string $cognome,
+    public function __construct1(string $username, string $nome, string $cognome,
         string $password) {
         $this->username = $username;
         $this->nome = $nome;
@@ -34,7 +41,7 @@ class Utente extends Entity {
         $this->password = $password;
     }
 
-    public function __construct(string $username, string $nome, string $cognome,
+    public function __construct2(string $username, string $nome, string $cognome,
         string $password, float $eustress) {
         $this->username = $username;
         $this->nome = $nome;

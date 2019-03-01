@@ -1,6 +1,9 @@
 <?php
 namespace algos\server\factory;
 
+use algos\server\dbprovider\DbProvider;
+use algos\server\entity\Domanda;
+
 require_once __DIR__ . '/../required/autoload.php';
 
 class DomandaProvider extends AbstractProvider {

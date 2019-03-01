@@ -2,6 +2,7 @@
 namespace algos\server\entity;
 
 require_once __DIR__ . '/../required/autoload.php';
+require_once __DIR__ . '/../required/method_overloader.php';
 
 class Notizia extends Entity {
 
@@ -28,8 +29,14 @@ class Notizia extends Entity {
     private $categoria;
 
     private $domanda;
+    
+    public function __construct($p1, $p2, $p3, $p4, $p5, $p6){
+        $args = func_get_args();
+        clear_array_args($args);
+        call_overload($this, $args, "__construct");
+    }
 
-    public function __construct(string $titolo, int $punteggio, int $idCategoria,
+    public function __construct0(string $titolo, int $punteggio, int $idCategoria,
         int $idDomanda) {
         $this->titolo = $titolo;
         $this->punteggio = $punteggio;
@@ -37,7 +44,7 @@ class Notizia extends Entity {
         $this->idDomanda = $idDomanda;
     }
 
-    public function __construct(string $titolo, string $corpo, string $fonte,
+    public function __construct1(string $titolo, string $corpo, string $fonte,
         int $punteggio, int $idCategoria, int $idDomanda) {
         $this->titolo = $titolo;
         $this->corpo = $corpo;
@@ -47,12 +54,16 @@ class Notizia extends Entity {
         $this->idDomanda = $idDomanda;
     }
 
-    public function __construct(string $titolo, string $link, int $punteggio,
+    public function __construct2(string $titolo, string $link, int $punteggio,
         int $idCategoria, int $idDomanda) {
         $this->titolo = $titolo;
         $this->punteggio = $punteggio;
         $this->tidCategoria = $idCategoria;
         $this->idDomanda = $idDomanda;
+    }
+    
+    public function getIdNotizia(){
+        return $this->idNotizia;
     }
 
     public function getTitolo() {

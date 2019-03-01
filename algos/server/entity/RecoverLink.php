@@ -3,6 +3,9 @@ namespace algos\server\entity;
 
 use DateTime;
 
+require_once __DIR__ . '/../required/autoload.php';
+require_once __DIR__ . '/../required/method_overloader.php';
+
 class RecoverLink extends Entity
 {
 
@@ -13,15 +16,21 @@ class RecoverLink extends Entity
     private $idUtente;
     
     private $utente;
+    
+    public function __construct($p1, $p2, $p3){
+        $args = func_get_args();
+        clear_array_args($args);
+        call_overload($this, $args, "__construct");
+    }
 
-    public function __construct(string $link, DateTime $scadenza, int $idUtente)
+    public function __construct0(string $link, DateTime $scadenza, int $idUtente)
     {
         $this->link = $link;
         $this->scadenza = $scadenza;
         $this->idUtente = $idUtente;
     }
     
-    public function __construct(int $idUtente){
+    public function __construct1(int $idUtente){
         $this->idUtente = $idUtente;
         $this->initRecoverLink();
     }

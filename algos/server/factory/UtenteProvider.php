@@ -1,6 +1,9 @@
 <?php
 namespace algos\server\factory;
 
+use algos\server\dbprovider\DbProvider;
+use algos\server\entity\Utente;
+
 require_once __DIR__ . '/../required/autoload.php';
 
 session_start();
@@ -43,6 +46,22 @@ class UtenteProvider extends AbstractProvider {
         }
         return false;
     }
+    
+    public function getLoggedUser(): Utente {
+        if(isset($_SESSION['user']))
+            return $_SESSION['user'];
+        else
+            return null;
+    }
+    
+    public function getUtenteFromEmail(string $email): Utente{
+        $user = DbProvider::instance()->selectWhereClause(Utente,
+            array(
+                
+                "email = $email"
+            ));
+        return $user;
+    }
 
     public function logout(): bool {
         $su = session_unset();
@@ -65,10 +84,10 @@ class UtenteProvider extends AbstractProvider {
     public function recoverPassword(string $email) : bool{
         $reclink = DbProvider::instance()->selectWhereClause(RecoverLink,
             array(
-                "idUtene = $email"
+                "idUtente = $email"
             ));
         if($reclink != NULL){
-            $reclink->getScadenza()//TODO finire scadenza < oggi
+            $reclink->getScadenza();//TODO finire scadenza < oggi
         }
         return false;
     }

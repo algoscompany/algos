@@ -1,6 +1,9 @@
 <?php
 namespace algos\server\factory;
 
+use algos\server\dbprovider\DbProvider;
+use algos\server\entity\Notizia;
+
 require_once __DIR__ . '/../required/autoload.php';
 
 class NotiziaProvider extends AbstractProvider {

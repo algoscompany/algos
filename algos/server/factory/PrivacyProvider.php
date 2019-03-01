@@ -5,6 +5,9 @@ require_once __DIR__.'/../required/autoload.php';
 
 session_start();
     
+use algos\server\dbprovider\DbProvider;
+use algos\server\entity\Consenso;
+use algos\server\entity\Finalita;
 use DateTime;
 
 class PrivacyProvider
@@ -45,7 +48,7 @@ class PrivacyProvider
     
     public function eliminaFinalita(Finalita $finalita): bool
     {
-        $app = DbPrrovider::instance()->selectWhereClause(Finalita, 
+        $app = DbProvider::instance()->selectWhereClause(Finalita, 
             array(
                 "idFinalita = ".$finalita->getId()
             ));

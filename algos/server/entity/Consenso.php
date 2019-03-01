@@ -3,6 +3,9 @@ namespace algos\server\entity;
 
 use DateTime;
 
+require_once __DIR__ . '/../required/autoload.php';
+require_once __DIR__ . '/../required/method_overloader.php';
+
 class Consenso extends Entity
 {
 

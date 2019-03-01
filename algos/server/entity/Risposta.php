@@ -4,6 +4,7 @@ namespace algos\server\entity;
 use DateTime;
 
 require_once __DIR__ . '/../required/autoload.php';
+require_once __DIR__ . '/../required/method_overloader.php';
 
 class Risposta extends Entity {
 
@@ -20,14 +21,20 @@ class Risposta extends Entity {
     private $utente;
 
     private $punteggio;
+    
+    public function __construct($p1, $p2, $p3, $p4){
+        $args = func_get_args();
+        clear_array_args($args);
+        call_overload($this, $args, "__construct");
+    }
 
-    public function __construct(int $idDomanda, int $idUtente) {
+    public function __construct0(int $idDomanda, int $idUtente) {
         $this->idDomanda = $idDomanda;
         $this->idUtente = $idUtente;
         $this->data = new DateTime("now");
     }
 
-    public function __construct(DateTime $data, int $idDomanda, int $idUtente,
+    public function __construct1(DateTime $data, int $idDomanda, int $idUtente,
         int $punteggio) {
         $this->data = $data;
         $this->idDomanda = $idDomanda;
