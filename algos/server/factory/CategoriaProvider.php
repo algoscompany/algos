@@ -1,6 +1,9 @@
 <?php
 namespace algos\server\factory;
 
+use algos\server\dbprovider\DbProvider;
+use algos\server\entity\Categoria;
+
 require_once __DIR__ . '/../required/autoload.php';
 
 class CategoriaProvider extends AbstractProvider {
