@@ -1,6 +1,8 @@
 <?php
 namespace algos\server\entity;
 
+use algos\server\factory\CategoriaProvider;
+use algos\server\factory\DomandaProvider;
 require_once __DIR__ . '/../required/autoload.php';
 require_once __DIR__ . '/../required/method_overloader.php';
 
@@ -22,15 +24,17 @@ class Notizia extends Entity {
 
     private $idDomanda;
 
-    private $suggest;       //suggerimento o musica
+    private $suggest;
 
+    // suggerimento o musica
     private $link;
 
     private $categoria;
 
     private $domanda;
-    
-    public function __construct($p1, $p2, $p3, $p4, $p5, $p6){
+
+    public function __construct($p1 = EMPTYVAL, $p2 = EMPTYVAL, $p3 = EMPTYVAL, $p4 = EMPTYVAL, $p5 = EMPTYVAL,
+        $p6 = EMPTYVAL) {
         $args = func_get_args();
         clear_array_args($args);
         call_overload($this, $args, "__construct");
@@ -61,8 +65,8 @@ class Notizia extends Entity {
         $this->tidCategoria = $idCategoria;
         $this->idDomanda = $idDomanda;
     }
-    
-    public function getIdNotizia(){
+
+    public function getIdNotizia() {
         return $this->idNotizia;
     }
 
@@ -101,7 +105,7 @@ class Notizia extends Entity {
     }
 
     public function isSuggest() {
-        return $this->type;
+        return (($this->link == null) ? true : false);
     }
 
     public function getLink() {
@@ -113,20 +117,28 @@ class Notizia extends Entity {
             $this->link = $link;
     }
 
-    public function getCategoria() {
+    public function getCategoria(): Categoria {
+        if ($this->categoria == null)
+            $this->categoria = CategoriaProvider::instance()->getCategoria(
+                $this->idCategoria);
         return $this->categoria;
     }
 
-    public function setCategoria($categoria) {
-        $this->categoria = $categoria;
+    public function setCategoria($idCategoria) {
+        $this->idCategoria = $idCategoria;
+        $this->categoria = null;
     }
 
     public function getDomanda() {
+        if ($this->domanda = null)
+            $this->domanda = DomandaProvider::instance()->getDomanda(
+                $this->idDomanda);
         return $this->domanda;
     }
 
-    public function setDomanda($domanda) {
-        $this->domanda = $domanda;
+    public function setDomanda($idDomanda) {
+        $this->idDomanda = $idDomanda;
+        $this->domanda = null;
     }
 
     public function getTableName(): string {
@@ -140,7 +152,6 @@ class Notizia extends Entity {
             "corpo" => $this->corpo,
             "fonte" => $this->fonte,
             "punteggio" => $this->punteggio,
-            "suggest" => $this->suggest,
             "link" => $this->link,
             "idCategoria" => $this->idCategoria,
             "idDomanda" => $this->idDomanda

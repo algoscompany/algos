@@ -11,11 +11,22 @@ class Categoria extends Entity {
     private $idCategoria;
 
     private $nome;
-
-    public function __construct(string $nome) {
-        $this->nome = $nome;
+    
+    public function __construct($p1 = EMPTYVAL, $p2 = EMPTYVAL){
+        $args = func_get_args();
+        clear_array_args($args);
+        call_overload($this, $args, "__construct");
     }
 
+    public function __construct0(string $nome) {
+        $this->nome = $nome;
+    }
+    
+    public function __construct1(int $id, string $nome) {
+        $this->idCategoria = $id;
+        $this->nome = $nome;
+    }
+    
     public function getIdCategoria(): int {
         return $this->idCategoria;
     }
@@ -35,7 +46,7 @@ class Categoria extends Entity {
     public function getColumn(): array {
         return array(
                 "idCategoria" => $this->idCategoria,
-                "Nome" => $this->nome
+                "nome" => $this->nome
         );
     }
 }

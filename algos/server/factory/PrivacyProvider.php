@@ -57,5 +57,15 @@ class PrivacyProvider
         }
         return false;
     }
+    
+    public function getFinalita() {
+        return DbProvider::instance()->select(Finalita::class);
+    }
+    
+    public function getFinalitaById(int $id){
+        return DbProvider::instance()->selectWhereClause(Finalita::class, array(
+            "Id = $id"
+        ));
+    }
 }
 

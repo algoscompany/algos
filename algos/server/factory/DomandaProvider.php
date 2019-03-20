@@ -8,12 +8,12 @@ require_once __DIR__ . '/../required/autoload.php';
 
 class DomandaProvider extends AbstractProvider {
 
-    private $instance;
+    private static $instance;
 
     private function __construct() {
     }
 
-    public function instance(): DomandaProvider {
+    public static function instance(): DomandaProvider {
         if (DomandaProvider::$instance == NULL)
             DomandaProvider::$instance = new DomandaProvider();
         return DomandaProvider::$instance;
@@ -24,7 +24,7 @@ class DomandaProvider extends AbstractProvider {
     }
     
     public function getDomande(): array{
-        return DbProvider::instance()->select(Domanda);
+        return DbProvider::instance()->select(new Domanda());
     }
     
     public function getDomanda(int $idDomanda): Domanda {
@@ -38,8 +38,8 @@ class DomandaProvider extends AbstractProvider {
         return DbProvider::instance()->delete($domanda);
     }
     
-    public function updateDomanda(Domanda $old, Domanda $new): void {
-        //TODO;
+    public function updateDomanda(Domanda $old, Domanda $new): bool {
+        return DbProvider::instance()->update($old, $new);
     }
     
 }
