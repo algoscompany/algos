@@ -2,6 +2,7 @@
 namespace algos\server\entity;
 
 require_once __DIR__ . '/../required/autoload.php';
+require_once __DIR__ . '/../required/method_overloader.php';
 
 class Domanda extends Entity {
 
@@ -12,8 +13,18 @@ class Domanda extends Entity {
     private $domanda;
     
     private $visible;
+    
+    public function __construct($p1 = EMPTYVAL){
+        $args = func_get_args();
+        clear_array_args($args);
+        call_overload($this, $args, "__construct");
+    }
+    
+    public function __construct0(){
+        
+    }
 
-    public function __construct(string $domanda) {
+    public function __construct1(string $domanda) {
         $this->domanda = $domanda;
     }
 
@@ -25,19 +36,15 @@ class Domanda extends Entity {
         return $this->domanda;
     }
 
-    public function setIdDomanda($idDomanda) {
-        $this->idDomanda = $idDomanda;
-    }
-
-    public function setDomanda($domanda) {
+    public function setDomanda(string $domanda) {
         $this->domanda = $domanda;
     }
     
-    public function getVisible(): bool{
-        $this->visible;
+    public function isVisible(): bool{
+        return $this->visible;
     }
     
-    public function setVisible($visible): void{
+    public function setVisibility(bool $visible): void{
         $this->visible = $visible;
     }
 
@@ -48,7 +55,8 @@ class Domanda extends Entity {
     public function getColumn(): array {
         return array(
             "IdDomanda" => $this->idDomanda,
-            "Domanda" => $this->domanda
+            "Domanda" => $this->domanda,
+            "visible" => $this->visible
         );
     }
 }

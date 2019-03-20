@@ -1,31 +1,20 @@
 <?php
 
+include_once __DIR__.'/usergateway.php';
+include_once __DIR__.'/administratorgateway.php';
+
+require_once __DIR__.'/../required/autoload.php';
+
 if(!isset($_GET['funcName'])){
 	header('HTTP/1.1 400 Bad Request');
 	die();
 }
 
-function sampleJson(){
-	$data ='
-		{
-			"nome" : "tommaso",
-			"cognome" : "sassoli123"	
-		}
-	';
-	echo $data;
-}
-
-function foo(){
-	$data = '
-	{
-		"saluto" : "ciaooooo"
-	}
-	';
-	echo $data;
-}
-
 if(function_exists($_GET['funcName'])){
-	$_GET['funcName']();
+    if(isset($_POST['json']))
+    	$_GET['funcName']($_POST['json']);
+    else
+	   $_GET['funcName']();
 }else{
 	header('HTTP/1.1 501 Function Not Implemented');
 	die();
