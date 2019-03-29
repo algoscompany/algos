@@ -20,8 +20,8 @@ class RispostaProvider extends AbstractProvider {
         return RispostaProvider::$instance;
     }
 
-    public function addRisposta(Domanda $domanda, int $punteggio): bool {
-        $ris = new Risposta($domanda->getIdDomanda(),
+    public function addRisposta(int $domanda, int $punteggio): bool {
+        $ris = new Risposta($domanda,
             UtenteProvider::instance()->getLoggedUser()->getUsername(),
             $punteggio);
         if (DbProvider::instance()->save($ris)) {

@@ -3,6 +3,8 @@ use algos\server\entity\Utente;
 use algos\server\factory\DomandaProvider;
 use algos\server\factory\NotiziaProvider;
 use algos\server\factory\UtenteProvider;
+use algos\server\factory\RispostaProvider;
+use algos\server\factory\PrivacyProvider;
 
 function getPasswordToken(string $json) { // OK
     $var = json_decode($json);
@@ -162,6 +164,18 @@ function getDomande() {          //OK
     echo json_encode($res);
 }
 
+function rispondiDomande($json){
+    $var = json_decode($json);
+    $arr = $var->domande;
+    foreach ($arr as $app){
+        RispostaProvider::instance()->addRisposta($app->idDomanda, $app->punteggio);
+    }
+    $res = array(
+        "result" => "ok"
+    );
+    echo json_encode($res);
+}
+
 function getNotizia($json) {        //OK
     $val = json_decode($json);
     $id = $val->idNotizia;
@@ -218,4 +232,22 @@ function getOverviewNotizie() {
     }
     
     echo json_encode($res);
+}
+
+function getTuttiTermini() {
+    $res = PrivacyProvider::instance()->getFinalita();
+    foreach ($res as $n) {
+        $rn = array(
+            "id" => $n->getId(),
+            "descrizione" => $n->getDescrizione(),
+            "fileAllegato" => $n->getFileAllegato()
+        );
+        $res[] = $rn;
+    }
+    
+    echo json_encode($res);
+}
+
+function acconsentiTermine($idFinalita, $dataOraAccettazione) {
+    
 }
