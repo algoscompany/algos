@@ -2,7 +2,6 @@
 namespace algos\server\factory;
 
 use algos\server\dbprovider\DbProvider;
-use algos\server\entity\Domanda;
 use algos\server\entity\Risposta;
 use algos\server\entity\Utente;
 use DateTime;

@@ -5,7 +5,7 @@ require_once __DIR__ . '/../required/autoload.php';
 
 class Configuration {
     private static $instance;
-    private $confFile = __DIR__ . "\config.ini";
+    private $confFile = __DIR__ . "/config.ini";
     private $conf;
     
     private function __construct(){
