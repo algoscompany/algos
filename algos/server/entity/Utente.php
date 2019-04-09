@@ -23,9 +23,9 @@ class Utente extends Entity {
     private $token;
 
     public function __construct($p1 = EMPTYVAL, $p2 = EMPTYVAL, $p3 = EMPTYVAL, $p4 = EMPTYVAL, $p5 = EMPTYVAL) {
-        $this->ruolo = 1;
-        $this->eustress = 0;
-        $this->token = 0;
+//         $this->ruolo = 0;
+//         $this->eustress = 0;
+//         $this->token = 0;
         
         $args = func_get_args();
         clear_array_args($args);

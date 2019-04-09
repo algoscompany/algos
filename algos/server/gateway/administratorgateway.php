@@ -1,12 +1,12 @@
 <?php
 use algos\server\entity\Categoria;
 use algos\server\entity\Utente;
+use algos\server\factory\CategoriaProvider;
 
 function inserisciCategoria($json) {
     $var = json_decode($json);
-    $id = $var->idCategoria;
     $nome = $var->nome;
-    $cat = Categoria::instance()->addCategoria($nome);
+    $cat = CategoriaProvider::instance()->addCategoria($nome);
     if ($cat) {
         $array = array(
             "result" => "ok"

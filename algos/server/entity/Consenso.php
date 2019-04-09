@@ -9,7 +9,7 @@ require_once __DIR__ . '/../required/method_overloader.php';
 
 class Consenso extends Entity {
 
-    private $TABLENAME = "Acconsente";
+    private const TABLENAME = "Acconsente";
 
     private $idFinalita;
 
@@ -20,9 +20,19 @@ class Consenso extends Entity {
     private $utente;
 
     private $dataOraAccettazione;
+    
+    public function __construct($p1 = EMPTYVAL, $p2 = EMPTYVAL, $p3 = EMPTYVAL) {
+        $args = func_get_args();
+        clear_array_args($args);
+        call_overload($this, $args, "__construct");
+    }
+    
+    public function __construct0(){
+        $this->dataOraAccettazione = new DateTime();
+    }
 
-    public function __construct(int $idFinalita = EMPTYVAL, String $idUtente = EMPTYVAL,
-        DateTime $dataOraAccettazione = EMPTYVAL) {
+    public function __construct1(int $idFinalita, String $idUtente,
+        DateTime $dataOraAccettazione) {
         $this->idFinalita = $idFinalita;
         $this->idUtente = $idUtente;
         $this->dataOraAccettazione = $dataOraAccettazione;
@@ -54,7 +64,7 @@ class Consenso extends Entity {
         return array(
             "idFinalita" => $this->idFinalita,
             "idUtente" => $this->idUtente,
-            "dataOraAccettazione" => $this->dataOraAccettazione
+            "dataOraAccettazione" => $this->dataOraAccettazione->format('Y-m-d H:i:s')
         );
     }
 }

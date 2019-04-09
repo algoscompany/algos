@@ -6,7 +6,7 @@ require_once __DIR__ . '/../required/method_overloader.php';
 
 class Finalita extends Entity {
 
-    private $TABLENAME = "Finalita";
+    private const TABLENAME = "Finalita";
 
     private $id;
 
@@ -14,8 +14,17 @@ class Finalita extends Entity {
 
     private $fileAllegato;
 
-    public function __construct(int $id = EMPTYVAL, string $descrizione = EMPTYVAL,
-        string $fileAllegato = EMPTYVAL) {
+    public function __construct($p1 = EMPTYVAL, $p2 = EMPTYVAL, $p3 = EMPTYVAL) {
+        $args = func_get_args();
+        clear_array_args($args);
+        call_overload($this, $args, "__construct");
+    }
+    
+    public function __construct0(){
+        
+    }
+
+    public function __construct1(int $id, string $descrizione, string $fileAllegato) {
         $this->id = $id;
         $this->descrizione = $descrizione;
         $this->fileAllegato = $fileAllegato;
@@ -33,7 +42,7 @@ class Finalita extends Entity {
         $this->descrizione = $descrizione;
     }
 
-    public function getFileAllegato(): string {
+    public function getFileAllegato(): ?string {
         return $this->fileAllegato;
     }
 

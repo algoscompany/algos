@@ -41,7 +41,7 @@ class NotiziaProvider extends AbstractProvider {
         return DbProvider::instance()->selectWhereClause(new Notizia(),
             array(
                     "idDomanda=$idDomanda"
-            ))[0];
+            ));
     }
 
     public function removeNotizia(int $id): Notizia {
@@ -69,10 +69,10 @@ class NotiziaProvider extends AbstractProvider {
         
         foreach ($domande as $domanda) {
             $risposte = DbProvider::instance()->selectWhereClause(
-                Risposta::class,
+                new Risposta(),
                 array(
                     "idDomanda = " . $domanda->getIdDomanda(),
-                    "idUtente = " . $u->getUsername()
+                    "idUtente = '" . $u->getEmail() ."'"
                 ));
             
             $sum = 0;
@@ -80,18 +80,16 @@ class NotiziaProvider extends AbstractProvider {
                 $sum += $risposta->getPunteggio();
             }
             $avg = $sum / count($risposte);
-            $domris[$domanda] = $avg;
+            $domris[$domanda->getIdDomanda()] = $avg;
         }
-        
         return $domris;
     }
     
     private function getNotizieToShow(array $dom): array {
         $notizieToShow = array();
         foreach ($dom as $d => $avg) {
-            $notizie = NotiziaProvider::instance()->getNotizieByDomanda(
-                $d->getIdDomanda());
-            
+            $notizie = NotiziaProvider::instance()->getNotizieByDomanda($d);
+
             foreach ($notizie as $notizia) {
                 if (($notizia->getPunteggio() >= floor($avg)) &&
                     ($notizia->getPunteggio() <= ceil($avg))) {
@@ -99,7 +97,6 @@ class NotiziaProvider extends AbstractProvider {
                     }
             }
         }
-        
         return $notizieToShow;
     }
 }

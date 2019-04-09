@@ -9,27 +9,51 @@ require_once __DIR__ . '/../required/autoload.php';
 
 class RispostaProvider extends AbstractProvider {
 
-    private $instance;
+    private static $instance;
 
     private function __construct() {}
 
-    public function instance(): RispostaProvider {
+    public static function instance(): RispostaProvider {
         if (RispostaProvider::$instance == NULL)
             RispostaProvider::$instance = new RispostaProvider();
         return RispostaProvider::$instance;
     }
 
-    public function addRisposta(int $domanda, int $punteggio): bool {
+    private function addRisposta(int $domanda, int $punteggio): bool {
         $ris = new Risposta($domanda,
-            UtenteProvider::instance()->getLoggedUser()->getUsername(),
-            $punteggio);
+            UtenteProvider::instance()->getLoggedUser()->getEmail(), $punteggio);
         if (DbProvider::instance()->save($ris)) {
-            UtenteProvider::instance()->getLoggedUser()->setEustress(
-                calcEustressForUtente(
-                    UtenteProvider::instance()->getLoggedUser()));
+            
             return true;
         }
         return false;
+    }
+
+    /**
+     * Crea una transazione al database per inserire tutte
+     * le risposte passate per l'utente loggato.
+     * $risposte = (idDomanda, punteggio)
+     */
+    public function addRisposte(array $risposte) {
+        $user = UtenteProvider::instance()->getLoggedUser();
+        if ($user != null) {
+            DbProvider::instance()->beginTransaction();
+            foreach ($risposte as $risposta) {
+                $res = $this->addRisposta($risposta->idDomanda,
+                    $risposta->punteggio);
+                if (! $res) {
+                    DbProvider::instance()->rollbackTransaction();
+                    return false;
+                }
+            }
+            $user->setEustress(
+                $this->calcEustressForUtente($user));
+            
+            DbProvider::instance()->commitTransaction();
+            return true;
+        }
+        else
+            return false;
     }
 
     public function getRisposte(DateTime $datetime): array {
@@ -50,8 +74,8 @@ class RispostaProvider extends AbstractProvider {
     }
 
     public function calcEustressForUtente(Utente $u): float {
-        //TODO calc eustress
-        
+        // TODO calc eustress
+        return 0;
     }
 }
 

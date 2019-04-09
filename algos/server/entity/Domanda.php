@@ -41,7 +41,7 @@ class Domanda extends Entity {
     }
     
     public function isVisible(): bool{
-        return $this->visible;
+        return (($this->visible == 1) ? true : false);
     }
     
     public function setVisibility(bool $visible): void{
@@ -54,8 +54,8 @@ class Domanda extends Entity {
 
     public function getColumn(): array {
         return array(
-            "IdDomanda" => $this->idDomanda,
-            "Domanda" => $this->domanda,
+            "idDomanda" => $this->idDomanda,
+            "domanda" => $this->domanda,
             "visible" => $this->visible
         );
     }

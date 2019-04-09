@@ -40,6 +40,12 @@ class UtenteProvider extends AbstractProvider {
             $keyS = md5(
                 $user->getEmail() . $user->getToken() . $user->getPassword());
             if ($keyS === $key) {
+                //aggiorno il token
+                $oldUser = clone $user;
+                $user->increaseToken();
+                UtenteProvider::instance()->updateUtente($oldUser, $user);
+                
+                //imposto la sessione
                 $_SESSION['user'] = $user;
                 return true;
             }

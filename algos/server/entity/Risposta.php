@@ -23,13 +23,18 @@ class Risposta extends Entity {
 
     private $punteggio;
 
-    public function __construct($p1, $p2, $p3, $p4) {
+    public function __construct($p1 = EMPTYVAL, $p2 = EMPTYVAL, $p3 = EMPTYVAL, 
+        $p4 = EMPTYVAL) {
         $args = func_get_args();
         clear_array_args($args);
         call_overload($this, $args, "__construct");
     }
+    
+    public function __construct00(){
+        
+    }
 
-    public function __construct0(int $idDomanda, int $idUtente, int $punteggio) {
+    public function __construct0(int $idDomanda, string $idUtente, int $punteggio) {
         $this->idDomanda = $idDomanda;
         $this->idUtente = $idUtente;
         $this->punteggio = $punteggio;
@@ -72,10 +77,10 @@ class Risposta extends Entity {
 
     public function getColumn(): array {
         return array(
-            "Data" => $this->data,
-            "Domanda" => $this->idDomanda,
-            "Utente" => $this->idUtente,
-            "Punteggio" => $this->punteggio
+            "data" => $this->data->format('Y-m-d H:i:s'),
+            "idDomanda" => $this->idDomanda,
+            "idUtente" => $this->idUtente,
+            "punteggio" => $this->punteggio
         );
     }
 }

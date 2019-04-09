@@ -11,6 +11,7 @@ if(!isset($_GET['funcName'])){
 }
 
 if(function_exists($_GET['funcName'])){
+    header('Content-Type: application/json');
     if(isset($_POST['json']))
     	$_GET['funcName']($_POST['json']);
     else

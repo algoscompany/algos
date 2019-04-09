@@ -11,12 +11,7 @@ function getPasswordToken(string $json) { // OK
     $email = $var->email;
     
     $user = UtenteProvider::instance()->getUtenteFromEmail($email);
-    $oldUser = clone $user;
-    
     $token = $user->getToken();
-    $user->increaseToken();
-    
-    UtenteProvider::instance()->updateUtente($oldUser, $user);
     
     $array = array(
         "token" => $token
@@ -24,7 +19,7 @@ function getPasswordToken(string $json) { // OK
     echo json_encode($array);
 }
 
-function login(string $json) {  //OK
+function login(string $json) { // OK
     $val = json_decode($json);
     $email = $val->email;
     $key = $val->key;
@@ -41,7 +36,7 @@ function login(string $json) {  //OK
     echo json_encode($res);
 }
 
-function logout() { //OK
+function logout() { // OK
     $logout = UtenteProvider::instance()->logout();
     if ($logout) {
         $array = array(
@@ -55,7 +50,7 @@ function logout() { //OK
     echo json_encode($array);
 }
 
-function registrazioneUtente($json) {       //OK
+function registrazioneUtente($json) { // OK
     $var = json_decode($json);
     $email = $var->email;
     $nome = $var->nome;
@@ -75,7 +70,7 @@ function registrazioneUtente($json) {       //OK
     echo json_encode($array);
 }
 
-function cancellaUtente() {     //OK
+function cancellaUtente() { // OK
     $cancellato = UtenteProvider::instance()->cancellaUtente();
     if ($cancellato) {
         $array = array(
@@ -89,7 +84,7 @@ function cancellaUtente() {     //OK
     echo json_encode($array);
 }
 
-function existEmail($json) {     // OK
+function existEmail($json) { // OK
     $var = json_decode($json);
     $email = $var->email;
     $exist = UtenteProvider::instance()->existEmail($email);
@@ -121,7 +116,7 @@ function resetPassword($json) {
     echo json_encode($res);
 }
 
-function getUtenteInfo() {      //OK
+function getUtenteInfo() { // OK
     $info = UtenteProvider::instance()->getLoggedUser();
     if ($info != null) {
         $array = array(
@@ -130,7 +125,7 @@ function getUtenteInfo() {      //OK
             "cognome" => $info->getCognome(),
             "eustress" => $info->getEustress(),
             "distress" => $info->getDistress(),
-            "administrator" => (($info->getDistress() == 1) ? true : false)
+            "administrator" => (($info->getRuolo() == 1) ? true : false)
         );
     } else
         $array = array(
@@ -154,29 +149,39 @@ function updateUtente($json) {
     echo json_encode($ra);
 }
 
-function getDomande() {          //OK
+function getDomande() { // OK
     $arr = DomandaProvider::instance()->getDomande();
     $res = array();
-    foreach ($arr as $dom)
+    foreach ($arr as $dom) {
         if ($dom->isVisible())
-            $res[] = $dom;
-    
-    echo json_encode($res);
+            $res[] = array(
+                "idDomanda" => $dom->getIdDomanda(),
+                "domanda" => $dom->getDomanda()
+            );
+    }
+    $res1 = array(
+        "domande" => $res
+    );
+    echo json_encode($res1);
 }
 
-function rispondiDomande($json){
+function rispondiDomande($json) { // OK
     $var = json_decode($json);
     $arr = $var->domande;
-    foreach ($arr as $app){
-        RispostaProvider::instance()->addRisposta($app->idDomanda, $app->punteggio);
+    $ins = RispostaProvider::instance()->addRisposte($arr);
+    if ($ins) {
+        $res = array(
+            "result" => "ok"
+        );
+    } else {
+        $res = array(
+            "result" => "notok"
+        );
     }
-    $res = array(
-        "result" => "ok"
-    );
     echo json_encode($res);
 }
 
-function getNotizia($json) {        //OK
+function getNotizia($json) { // OK
     $val = json_decode($json);
     $id = $val->idNotizia;
     
@@ -189,7 +194,7 @@ function getNotizia($json) {        //OK
  * Restituisce un array con una singola notizia.
  * Restituisce codificati: idNotizia, titolo, corpo, fonte, idCategoria e categoria (nome).
  */
-function encodeNotiziaById($id): array {        //OK(vedi getNotizia)
+function encodeNotiziaById($id): array { // OK(vedi getNotizia)
     $var = NotiziaProvider::instance()->getNotizia($id);
     if ($var != NULL) {
         $res = array(
@@ -216,27 +221,36 @@ function searchNotizie($json) {
     // TODO search notizie per nome o categoria
 }
 
-function getOverviewNotizie() {
-    $customNotizie = NotiziaProvider::instance()->getCustomNotizie(
-        UtenteProvider::instance()->getLoggedUser());
-    
-    $res = array();
-    foreach ($customNotizie as $n) {
-        $rn = array(
-            "idNotizia" => $n->getIdNotizia(),
-            "titolo" => $n->getTitolo(),
-            "idCategoria" => $n->getCategoria()->getIdCategoria(),
-            "categoria" => $n->getCategoria()->getNome()
+function getOverviewNotizie() { // OK
+    $user = UtenteProvider::instance()->getLoggedUser();
+    if ($user != null) {
+        $customNotizie = NotiziaProvider::instance()->getCustomNotizie($user);
+        
+        $res = array();
+        foreach ($customNotizie as $n) {
+            $rn = array(
+                "idNotizia" => $n->getIdNotizia(),
+                "titolo" => $n->getTitolo(),
+                "idCategoria" => $n->getCategoria()->getIdCategoria(),
+                "categoria" => $n->getCategoria()->getNome()
+            );
+            $res[] = $rn;
+        }
+        
+        if ($res == null)
+            $res = array(
+                "EMPTY"
+            );
+    } else
+        $res = array(
+            "NULL"
         );
-        $res[] = $rn;
-    }
-    
     echo json_encode($res);
 }
 
 function getTuttiTermini() {
-    $res = PrivacyProvider::instance()->getFinalita();
-    foreach ($res as $n) {
+    $fin = PrivacyProvider::instance()->getFinalita();
+    foreach ($fin as $n) {
         $rn = array(
             "id" => $n->getId(),
             "descrizione" => $n->getDescrizione(),
@@ -244,10 +258,31 @@ function getTuttiTermini() {
         );
         $res[] = $rn;
     }
+    $res1 = array(
+        "termini" => $res
+    );
+    echo json_encode($res1);
+}
+
+function acconsentiTermine($json) {
+    $obj = json_decode($json);
+    $idFinalita = $obj->idFinalita;
+    $dataOraAccettazione = $obj->dataOraAccettazione;
     
+    $pc = PrivacyProvider::instance()->prestaConsenso($idFinalita, 
+        new DateTime($dataOraAccettazione));
+    if ($pc) {
+        $res = array(
+            "result" => true
+        );
+    } else {
+        $res = array(
+            "result" => false
+        );
+    }
     echo json_encode($res);
 }
 
-function acconsentiTermine($idFinalita, $dataOraAccettazione) {
-    
-}
+function revocaConsenso($json) {}
+
+function getConsensi($json) {}

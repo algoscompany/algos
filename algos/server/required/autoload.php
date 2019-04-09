@@ -5,7 +5,7 @@
  * funzionante il linking delle classi a run-time
  */
 $inifile = parse_ini_file('autoloadconf.ini');
-define( 'PROJECTPATH', $inifile['path']);
+define( 'PROJECTPATH', __DIR__ . '/../../../');
 
 function invertslash($str){
     return str_replace('\\','/',$str);
