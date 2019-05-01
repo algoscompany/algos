@@ -28,7 +28,7 @@ class Consenso extends Entity {
     }
     
     public function __construct0(){
-        $this->dataOraAccettazione = new DateTime();
+        //$this->dataOraAccettazione = new DateTime();
     }
 
     public function __construct1(int $idFinalita, String $idUtente,
@@ -53,7 +53,13 @@ class Consenso extends Entity {
     }
 
     public function getDataOraAccettazione(): DateTime {
-        return $this->dataOraAccettazione;
+        if ($this->dataOraAccettazione != null){
+            if(!($this->dataOraAccettazione instanceof DateTime))
+                $this->dataOraAccettazione = new DateTime($this->dataOraAccettazione);
+            return $this->dataOraAccettazione;
+        }else{
+            return new DateTime();
+        }
     }
 
     public function getTableName(): string {
@@ -64,7 +70,7 @@ class Consenso extends Entity {
         return array(
             "idFinalita" => $this->idFinalita,
             "idUtente" => $this->idUtente,
-            "dataOraAccettazione" => $this->dataOraAccettazione->format('Y-m-d H:i:s')
+            "dataOraAccettazione" => $this->getDataOraAccettazione()->format('Y-m-d H:i:s')
         );
     }
 }

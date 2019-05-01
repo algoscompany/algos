@@ -213,12 +213,31 @@ function encodeNotiziaById($id): array { // OK(vedi getNotizia)
     return $res;
 }
 
-function searchNotizie($json) {
+function searchNotizie($json) { // OK
     $val = json_decode($json);
     $titolo = $val->titolo;
     $idCategoria = $val->idcategoria;
     
-    // TODO search notizie per nome o categoria
+    $arr = NotiziaProvider::instance()->searchByTitoloOrCategoria($titolo,
+        $idCategoria);
+    $res = array();
+    if ($arr != null) {
+        foreach ($arr as $var) {
+            $res[] = array(
+                "idNotizia" => $var->getIdNotizia(),
+                "titolo" => $var->getTitolo(),
+                "corpo" => $var->getCorpo(),
+                "fonte" => $var->getFonte(),
+                "idCategoria" => $var->getCategoria()->getIdCategoria(),
+                "categoria" => $var->getCategoria()->getNome()
+            );
+        }
+    } else {
+        $res = array(
+            "NULL"
+        );
+    }
+    echo json_encode($res);
 }
 
 function getOverviewNotizie() { // OK
@@ -248,7 +267,7 @@ function getOverviewNotizie() { // OK
     echo json_encode($res);
 }
 
-function getTuttiTermini() {
+function getTuttiTermini() { // OK
     $fin = PrivacyProvider::instance()->getFinalita();
     foreach ($fin as $n) {
         $rn = array(
@@ -264,12 +283,12 @@ function getTuttiTermini() {
     echo json_encode($res1);
 }
 
-function acconsentiTermine($json) {
+function acconsentiTermine($json) { // OK
     $obj = json_decode($json);
     $idFinalita = $obj->idFinalita;
     $dataOraAccettazione = $obj->dataOraAccettazione;
     
-    $pc = PrivacyProvider::instance()->prestaConsenso($idFinalita, 
+    $pc = PrivacyProvider::instance()->prestaConsenso($idFinalita,
         new DateTime($dataOraAccettazione));
     if ($pc) {
         $res = array(
@@ -285,4 +304,30 @@ function acconsentiTermine($json) {
 
 function revocaConsenso($json) {}
 
-function getConsensi($json) {}
+function getConsensi() {
+    $consensi = PrivacyProvider::instance()->getConsensi();
+    $res = array();
+    if ($consensi != null) {
+        foreach ($consensi as $c) {
+            $res[] = array(
+                "finalita" => formatFinalita($c->getFinalita()),
+                "idUtente" => $c->getUtente()->getEmail(),
+                "dataOraAccettazione" => $c->getDataOraAccettazione()->format('Y-m-d H:i:s')
+            );
+        }
+    }else{
+        $res = array(
+            "NULL"
+        );
+    }
+    echo json_encode($res);
+}
+
+function formatFinalita($f){
+    return array(
+        "id" => $f->getId(),
+        "descrizione" => $f->getDescrizione(),
+        "fileAllegato" => $f->getFileAllegato()
+    );
+}
+

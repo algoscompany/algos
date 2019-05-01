@@ -24,8 +24,6 @@ class Notizia extends Entity {
 
     private $idDomanda;
 
-    private $suggest;
-
     // suggerimento o musica
     private $link;
 

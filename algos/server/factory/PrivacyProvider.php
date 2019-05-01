@@ -28,9 +28,9 @@ class PrivacyProvider {
             $isPres = DbProvider::instance()->selectWhereClause(new Consenso(),
                 array(
                     "idFinalita=$idFinalita",
-                    "idUtente='".$user->getEmail()."'"
+                    "idUtente='" . $user->getEmail() . "'"
                 ));
-            if($isPres != null)
+            if ($isPres != null)
                 return false;
             
             $app = new Consenso($idFinalita, $user->getEmail(),
@@ -46,6 +46,19 @@ class PrivacyProvider {
                 "idFinalita = $idFinalita",
                 "idUtente = " . $_SESSION['user']->getEmail()
             ));
+    }
+
+    public function getConsensi(): ?array {
+        $user = UtenteProvider::instance()->getLoggedUser();
+        if ($user != null) {
+            $consensi = DbProvider::instance()->selectWhereClause(
+                new Consenso(),
+                array(
+                    "idUtente = '" . $user->getEmail()."'"
+                ));
+            return $consensi;
+        } else
+            return null;
     }
 
     public function inserisciFinalita(Finalita $finalita): bool {
@@ -71,7 +84,7 @@ class PrivacyProvider {
         return DbProvider::instance()->selectWhereClause(new Finalita(),
             array(
                 "Id = $id"
-            ));
+            ))[0];
     }
 }
 

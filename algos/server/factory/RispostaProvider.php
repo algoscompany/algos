@@ -46,8 +46,12 @@ class RispostaProvider extends AbstractProvider {
                     return false;
                 }
             }
+            $oldUser = clone $user;
             $user->setEustress(
                 $this->calcEustressForUtente($user));
+            
+            UtenteProvider::instance()->updateUtente($oldUser, $user);
+            UtenteProvider::instance()->refreshLoggedUser();
             
             DbProvider::instance()->commitTransaction();
             return true;

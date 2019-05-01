@@ -77,7 +77,7 @@ class Risposta extends Entity {
 
     public function getColumn(): array {
         return array(
-            "data" => $this->data->format('Y-m-d H:i:s'),
+            "data" => (($this->data != null) ? $this->data->format('Y-m-d H:i:s') : null),
             "idDomanda" => $this->idDomanda,
             "idUtente" => $this->idUtente,
             "punteggio" => $this->punteggio

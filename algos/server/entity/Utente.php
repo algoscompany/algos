@@ -16,11 +16,11 @@ class Utente extends Entity {
 
     private $password;
 
-    private $eustress;
+    private $eustress = 0;
 
-    private $ruolo;
+    private $ruolo = 0;
 
-    private $token;
+    private $token = 0;
 
     public function __construct($p1 = EMPTYVAL, $p2 = EMPTYVAL, $p3 = EMPTYVAL, $p4 = EMPTYVAL, $p5 = EMPTYVAL) {
 //         $this->ruolo = 0;

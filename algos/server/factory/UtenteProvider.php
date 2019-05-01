@@ -35,7 +35,7 @@ class UtenteProvider extends AbstractProvider {
                 
                 "email = '$email'"
             ));
-        $user = $users[0];
+        $user = ($users != null ? $users[0] : null);
         if ($user != NULL) {
             $keyS = md5(
                 $user->getEmail() . $user->getToken() . $user->getPassword());
@@ -58,6 +58,16 @@ class UtenteProvider extends AbstractProvider {
             return $_SESSION['user'];
         else
             return null;
+    }
+    
+    public function refreshLoggedUser() : bool{
+        if($this->getLoggedUser() != null){
+            $up = $this->getUtenteFromEmail($_SESSION['user']->getEmail());
+            $_SESSION['user'] = $up;
+            
+            return true;
+        }else
+            return false;
     }
 
     public function updateUtente(Utente $old, Utente $new): bool {
