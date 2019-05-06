@@ -1,0 +1,54 @@
+body{
+	background-color: #191919;
+	padding: 0;
+	margin: 0;
+}
+
+.centered{
+	top: 50%;
+	left: 50%;
+}
+
+.btn-rounded {
+    -webkit-border-radius: 10em;
+    border-radius: 10em;
+}
+
+.form-account{
+	background-color: #191919;
+	color: white;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.text-input{
+	color: white;
+	font-family: 'Exo', san-seriff;
+}
+
+.gear {
+    color: white;
+    font-size: 200px;
+}
+
+.gear:hover{
+  -webkit-animation: rotation 2s infinite linear;
+}
+
+@-webkit-keyframes rotation {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
+
+.fillAlertSpan{
+	color: red;
+	display: none;
+	font-size: 14px;
+}

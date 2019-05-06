@@ -81,7 +81,11 @@ class NotiziaProvider extends AbstractProvider {
             foreach ($risposte as $risposta) {
                 $sum += $risposta->getPunteggio();
             }
-            $avg = $sum / count($risposte);
+            if(count($risposte) != 0){
+                $avg = $sum / count($risposte);
+            }else{
+                $avg = 0;                
+            }
             $domris[$domanda->getIdDomanda()] = $avg;
         }
         return $domris;

@@ -181,6 +181,21 @@ function rispondiDomande($json) { // OK
     echo json_encode($res);
 }
 
+function isTestEffettuato(){
+    $test = RispostaProvider::instance()->isTestEffettuatoOggi();
+    if($test){
+        $res = array(
+            "result" => true
+        );
+    }else{
+        $res = array(
+            "result" => false
+        );
+    }
+    
+    echo json_encode($res);
+}
+
 function getNotizia($json) { // OK
     $val = json_decode($json);
     $id = $val->idNotizia;

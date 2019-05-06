@@ -76,6 +76,18 @@ class RispostaProvider extends AbstractProvider {
                 "data = " . $date->format("YYYY-mm-dd")
             ));
     }
+    
+    public function isTestEffettuatoOggi(): bool{
+        $usr = UtenteProvider::instance()->getLoggedUser();
+        if($usr != null){
+            $oggi = new DateTime("now");
+            $res = DbProvider::instance()->selectWhereClause(new Risposta(), array(
+                "idUtente = '" . $usr->getEmail() ."'",
+                "DATE(Data) = '" . $oggi->format("Y-m-d") ."'"
+            ));
+            return($res != null ? true : false);
+        }
+    }
 
     public function calcEustressForUtente(Utente $u): float {
         // TODO calc eustress

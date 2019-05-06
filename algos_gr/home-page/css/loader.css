@@ -1,0 +1,57 @@
+.rotate {
+  animation: rotation 8s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.centered {
+  margin-left: 10%;
+  margin-right: auto;
+  margin-top: 10%;
+}
+
+.container{
+  display: block;
+  width: 50%;
+}
+
+.head{
+  width:30%;
+  left:25%;
+  position:absolute;
+}
+
+.gear{
+  position: relative;
+  margin-left: 80%;
+  margin-top: 25%;
+  width: 25%;
+}
+
+.gear2{
+  position: relative;
+  margin-left: 95%;
+  margin-top: -3%;
+  width: 15%;
+  transform: rotate(20deg);
+}
+
+.reverse{
+  animation: reversify 8s infinite linear;
+}
+
+@keyframes reversify {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
