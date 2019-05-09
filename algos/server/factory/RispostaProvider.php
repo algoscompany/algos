@@ -50,10 +50,14 @@ class RispostaProvider extends AbstractProvider {
             $user->setEustress(
                 $this->calcEustressForUtente($user));
             
-            UtenteProvider::instance()->updateUtente($oldUser, $user);
+            $uu = UtenteProvider::instance()->updateUtente($oldUser, $user);
+            if($uu)
+                DbProvider::instance()->commitTransaction();
+            else{
+                DbProvider::instance()->rollbackTransaction();
+                return false;
+            }
             UtenteProvider::instance()->refreshLoggedUser();
-            
-            DbProvider::instance()->commitTransaction();
             return true;
         }
         else
@@ -90,8 +94,65 @@ class RispostaProvider extends AbstractProvider {
     }
 
     public function calcEustressForUtente(Utente $u): float {
-        // TODO calc eustress
-        return 0;
+        $res = DbProvider::instance()->selectWhereClause(new Risposta(), array(
+            "IdUtente = '" . $u->getEmail() . "'",
+            "DATE(Data) > (NOW() - INTERVAL 7 DAY)"
+        ));
+        
+        //CALCOLO L'ARRAY ASSOCIATIVO VALORE - MEDIA PUNTEGGIO RISPOSTE
+        $risposte = array();
+        foreach($res as $v){
+            $risposte[$v->getData()->format("Y-m-d")][] = $v;
+        }
+        
+        $eventi = array();
+        foreach($risposte as $k => $v){
+            $sum = 0;
+            $count = 0;
+            foreach($v as $r){
+                $sum = $sum + $r->getPunteggio();
+                $count++;
+            }
+            if($count != 0)
+                $eventi[$k] = $sum / $count;
+            else 
+                $eventi[$k] = 0;
+        }
+        //sort($eventi);
+        
+        //RIEMPIO L'ARRAY DOVE MANCANO I VALORI
+        $begin = new DateTime(max(array_keys($eventi)));
+        $end = clone $begin;
+        $end->modify("-6 day");
+
+        while ($begin >= $end) {
+            $format = $begin->format("Y-m-d");
+            if(!array_key_exists($format, $eventi)){
+               $eventi[$format] = 0;
+            }
+            $begin->modify("-1 day");
+        }
+        krsort($eventi);
+
+        //CALCOLO EUSTRESS
+        //X punteggio
+        //W peso
+        //XW punteggio pesato
+        $W = 0;
+        $XW = 0;
+        
+        $w = 7;
+        foreach($eventi as $v){
+            $x = $v;
+            $xw = $x * $w;
+            if($x != 0)
+                $W = $W + $w;
+            $XW = $XW + $xw;
+            $w--;
+        }
+        
+        $eustress = $XW / $W;
+        return ($eustress / 5) * 100;
     }
 }
 

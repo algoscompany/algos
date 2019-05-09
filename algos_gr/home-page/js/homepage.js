@@ -20,8 +20,8 @@ async function logout(){
 	})
 }
 
-async function getUtenteInfo(){
-	if(utenteInfo == null){
+async function getUtenteInfo(u){
+	if(utenteInfo == null || u == true){
 		await getResource("getUtenteInfo")
 		.then((json) => {
 			let obj = JSON.parse(json);
@@ -62,6 +62,11 @@ async function setChart(){
 		myLineChart.update();
 		incLoadedFunc();
 	}
+}
+
+async function updateChart(){
+	await getUtenteInfo(true);
+	setChart();
 }
 
 async function setNavBar(){

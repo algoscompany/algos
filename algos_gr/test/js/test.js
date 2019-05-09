@@ -63,8 +63,7 @@ async function commitTest(){
 				});
 				$('#testModal').modal('hide');
 				setTestEffettuato();
-
-				//// TODO: Aggiorna grafico eustress / distress
+				updateChart();
 			}
 		})
 		.catch((err) => {

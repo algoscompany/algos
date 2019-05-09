@@ -83,7 +83,7 @@ class DbProvider implements DbProviderInterface {
         }
         return $arr;
     }
-
+    
     public function save(Entity $obj): bool {
         $sql = "INSERT INTO " . $obj->getTableName();
         $sql .= " (" . $this->formatColmn($obj->getColumn()) . ") ";

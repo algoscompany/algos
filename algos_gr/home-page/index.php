@@ -68,7 +68,7 @@
 		    Quidem, corporis at quae tempore nisi impedit cupiditate perferendis nesciunt, ex dolores doloremque!
 		    Sit, rem, in?
 		  </p>
-			<footer class="blockquote-footer mb-3 text-right">Wholesome Facts from catfact.ninja</footer>
+			<footer class="blockquote-footer mb-3 text-right">Wholesome Facts da catfact.ninja</footer>
 		</blockquote>
 
 		  <div class="row">

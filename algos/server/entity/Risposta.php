@@ -50,6 +50,8 @@ class Risposta extends Entity {
     }
 
     public function getData(): DateTime {
+        if(!($this->data instanceof DateTime) and $this->data != null)
+            $this->data = new DateTime($this->data);
         return $this->data;
     }
 

@@ -36,7 +36,7 @@ class Utente extends Entity {
 
     public function __construct0(string $email, string $password) {
         $this->email = $email;
-        $this->password = $password;
+        $this->password = $this->encryptPassword($password);
     }
 
     public function __construct2(string $email, string $nome, string $cognome) {
@@ -58,7 +58,7 @@ class Utente extends Entity {
         $this->email = $email;
         $this->nome = $nome;
         $this->cognome = $cognome;
-        $this->password = $password;
+        $this->password = $this->encryptPassword($password);
         $this->eustress = $eustress;
     }
 
