@@ -50,7 +50,7 @@ class Utente extends Entity {
         $this->email = $email;
         $this->nome = $nome;
         $this->cognome = $cognome;
-        $this->password = $password;
+        $this->password = $this->encryptPassword($password);
     }
 
     public function __construct3(string $email, string $nome, string $cognome,

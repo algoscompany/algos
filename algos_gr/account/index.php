@@ -25,7 +25,7 @@
   <body>
     <form class="form-account" action="index.html" method="post" onsubmit="return updateUtenteInfo();" autocomplete="off">
       <div class="container">
-        <div class="row mb-7">
+        <div class="row mb-7 gearDiv">
           <div class="col-sm" style="text-align: center;">
             <i class="fas fa-cog gear"></i>
           </div>

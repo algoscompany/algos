@@ -60,12 +60,12 @@ function updateUtenteInfo(){
           "cognome": cognome,
           "password": passw
         });
-        getResource("updateUtenteInfo", json)
+        getResource("updateUtente", json)
         .then((json) => {
           let res = JSON.parse(json).result;
           if(res == "ok"){
-          }else {
             redirectPage("home-page");
+          }else {
             alert("Errore in aggiornamento");
           }
         })

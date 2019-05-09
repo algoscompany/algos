@@ -120,7 +120,7 @@ function cardToString(arr){
 		str +=
 		'<div class="card mb-4">'+
 			'<div class="view overlay">'+
-				'<img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">'+
+				'<img class="card-img-top" src="https://source.unsplash.com/category/nature,happy/287x191?sig='+entry['idNotizia']+'" alt="Card image cap">'+
 			'</div>'+
 			'<div class="card-body">'+
 				'<h4 class="card-title">' + entry["titolo"] + '</h4>'+

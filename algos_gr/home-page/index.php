@@ -82,7 +82,7 @@
 		    </div>
 		    <div class="col">
 					<div class="container main-menu text-center">
-						<div class="carousel slide" data-ride="carousel" id="news-carousel">	<!--data-interval="false" per mantenere fermo il carousel in fase di sviluppo-->
+						<div class="carousel slide top" data-ride="carousel" id="news-carousel">	<!--data-interval="false" per mantenere fermo il carousel in fase di sviluppo-->
 							<!-- indicators -->
 							<ol class="carousel-indicators"></ol>
 							<!-- wrapper for slides -->
@@ -97,6 +97,7 @@
 						    <span class="sr-only">Next</span>
 						  </a>
 						</div>
+						<footer class="blockquote-footer mb-3 text-right">Immagini da Unsplash.com</footer>
 				</div>
 		    </div>
 		  </div>

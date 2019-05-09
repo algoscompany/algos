@@ -139,13 +139,15 @@ function updateUtente($json) {
     $email = $var->email;
     $nome = $var->nome;
     $cognome = $var->cognome;
+    $pass = $var->password;
     $old = UtenteProvider::instance()->getLoggedUser();
-    $new = new Utente($email, $nome, $cognome);
+    $new = new Utente($email, $nome, $cognome, $pass);
     
     $res = UtenteProvider::instance()->updateUtente($old, $new);
     $ra = array(
         "result" => (($res) ? "ok" : "notok")
     );
+    UtenteProvider::instance()->refreshLoggedUser();
     echo json_encode($ra);
 }
 
@@ -217,6 +219,7 @@ function encodeNotiziaById($id): array { // OK(vedi getNotizia)
             "titolo" => $var->getTitolo(),
             "corpo" => $var->getCorpo(),
             "fonte" => $var->getFonte(),
+            "link" => $var->getLink(),
             "idCategoria" => $var->getCategoria()->getIdCategoria(),
             "categoria" => $var->getCategoria()->getNome()
         );

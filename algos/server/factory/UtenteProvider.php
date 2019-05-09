@@ -86,7 +86,8 @@ class UtenteProvider extends AbstractProvider {
     public function logout(): bool {
         if ($this->getLoggedUser() === null)
             return false;
-        $su = session_unset();
+        //$su = session_unset();
+        $su = true;
         $sd = session_destroy();
         return (($su && $sd) ? true : false);
     }

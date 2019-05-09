@@ -29,6 +29,10 @@ body{
 	font-family: 'Exo', san-seriff;
 }
 
+.gearDiv{
+	padding-top: 1%;
+}
+
 .gear {
     color: white;
     font-size: 200px;
