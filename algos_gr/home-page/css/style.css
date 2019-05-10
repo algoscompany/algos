@@ -1,21 +1,41 @@
 html{
 	width: 100%;
+	height: 100%;
 }
 
+body{
+	background-image: linear-gradient(125deg,#55E6C1,#25CCF7,#1B9CFC,#8e44ad);
+	animation: bganimation 15s infinite;
+	background-size: 400%;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+@keyframes bganimation{
+	0%{
+		background-position: 0% 50%;
+	}
+	50%{
+		background-position: 100% 50%;
+	}
+	100%{
+		background-position: 0% 50%;
+	}
+}
 .wholesome{
-	width: 45%;
-	position: absolute;
+	width: 100%;
+	position: relative;
 	right: 0;
 	top: 0;
 }
 
 .menù{
-	width:50%;
+	width:100%;
 	background-color: #191919;
+	top: 0;
 }
 
-.graphics{	margin-top: 15px;
-	margin-left: 25px;
+.graphics{
 	width: 70%;
 }
 
@@ -69,23 +89,14 @@ html{
 	padding: 25px;
 }
 
-.main-menu{
-	margin-top: 20%;
-}
-
 @media only screen and (max-width: 1440px) {
-	.main-menu{
-		margin-top: 37%;
-	}
 	#music-player{
 		width: 200px;
 	}
 }
 
 @media only screen and (max-width: 1440px) {
-	.main-menu{
-		/*margin-top: 45%;*/
-	}
+
 }
 
 @media only screen and (max-width: 991px) {
@@ -105,10 +116,6 @@ html{
 	.line{
 		width: 90%;
 	}
-	.main-menu{
-		width: 100%;
-		margin-top: 15px;
-	}
 	.navbar{
 		width: 100%;
 	}
@@ -119,6 +126,12 @@ html{
 		width: auto;
 	}
 	.col{
-		margin-left: 10%;
+		padding-right: 0;
+	}
+}
+
+@media only screen and (max-width: 600px){
+	.col{
+		padding-right: 0;
 	}
 }

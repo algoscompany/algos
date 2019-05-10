@@ -23,6 +23,7 @@
 		<script type="text/javascript" src="js/homepage.js"></script>
 		<script type="text/javascript" src="js/wsf.js"></script>
 	</head>
+	<!--style="background-color: #2c3e50; color: #ecf0f1;"-->
 	<body onload="initHomePage();">
 		<!-- over div prova-->
 		<div class="overlayloader" id="overdiv">
@@ -30,57 +31,59 @@
 		</div>
 
 		<!--Navbar -->
-		<nav class="mb-1 navbar navbar-expand-lg navbar-dark menù">
-		  <a class="navbar-brand" href="#">Algos</a>
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
-		    aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
-		    <ul class="navbar-nav ml-auto">
-		      <li class="nav-item" id="administratorButton" style="display:none;">
-		        <a class="nav-link" href="#">
-		          <i class="fas fa-user-tie"></i> Admin
-		          <span class="sr-only">(current)</span>
-		        </a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="#" data-toggle="modal" data-target="#testModal" id="testButton">
-		          <i class="fas fa-tasks"></i> Test
-						</a>
-		      </li>
-		      <li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-1" data-toggle="dropdown">
-					<i class="fas fa-user"></i><span id="profileButton"> Profile </span>
-				</a>
-				<div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-1">
-				  <a class="dropdown-item" href="<?php echo getAlgosLink('account'); ?>"><i class="fas fa-cog"></i>  Settings</a>
-				  <a class="dropdown-item" href="" onclick="logout(); return false;"><i class="fas fa-sign-out-alt"></i>  Logout</a>
-				</div>
-		      </li>
-		    </ul>
-		  </div>
-		</nav>
+
 		<!--/.Navbar -->
-		<blockquote class="blockquote bq-warning wholesome quote">
-		  <p class="bq-title ">News of the day</p>
-		  <p  id="wholesomefacts">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores quibusdam dignissimos itaque harum illo!
-		    Quidem, corporis at quae tempore nisi impedit cupiditate perferendis nesciunt, ex dolores doloremque!
-		    Sit, rem, in?
-		  </p>
-			<footer class="blockquote-footer mb-3 text-right">Wholesome Facts da catfact.ninja</footer>
-		</blockquote>
+
 
 		  <div class="row">
 		    <div class="col graphics">
-						<div class="doughnut">
-							<canvas id="doughnutChart" style="margin-bottom: 10px;"></canvas>
+					<nav class="mb-1 navbar navbar-expand-lg navbar-dark menù mb-4">
+						<a class="navbar-brand" href="#">Algos</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+							aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+							<ul class="navbar-nav ml-auto">
+								<li class="nav-item" id="administratorButton" style="display:none;">
+									<a class="nav-link" href="#">
+										<i class="fas fa-user-tie"></i> Admin
+										<span class="sr-only">(current)</span>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#" data-toggle="modal" data-target="#testModal" id="testButton">
+										<i class="fas fa-tasks"></i> Test
+									</a>
+								</li>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-1" data-toggle="dropdown">
+								<i class="fas fa-user"></i><span id="profileButton"> Profile </span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-1">
+								<a class="dropdown-item" href="<?php echo getAlgosLink('account'); ?>"><i class="fas fa-cog"></i>  Settings</a>
+								<a class="dropdown-item" href="" onclick="logout(); return false;"><i class="fas fa-sign-out-alt"></i>  Logout</a>
+							</div>
+								</li>
+							</ul>
 						</div>
-						<div class="line">
-							<canvas id="lineChart"></canvas>
-						</div>
+					</nav>
+					<div class="doughnut">
+						<canvas id="doughnutChart" style="margin-bottom: 10px;"></canvas>
+					</div>
+					<div class="line">
+						<canvas id="lineChart"></canvas>
+					</div>
 		    </div>
 		    <div class="col">
+					<blockquote class="blockquote bq-warning wholesome quote mb-3">
+					  <p class="bq-title ">News of the day</p>
+					  <p  id="wholesomefacts">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores quibusdam dignissimos itaque harum illo!
+					    Quidem, corporis at quae tempore nisi impedit cupiditate perferendis nesciunt, ex dolores doloremque!
+					    Sit, rem, in?
+					  </p>
+						<footer class="blockquote-footer mb-3 text-right">Wholesome Facts da catfact.ninja</footer>
+					</blockquote>
 					<div class="container main-menu text-center">
 						<div class="carousel slide top" data-ride="carousel" id="news-carousel">	<!--data-interval="false" per mantenere fermo il carousel in fase di sviluppo-->
 							<!-- indicators -->

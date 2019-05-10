@@ -1,5 +1,5 @@
 //const urlHost = "http://algos.altervista.org/algoscl.php";
-const urlHost = "http://localhost/algos/server/gateway/gateway.php";
+const urlHost = "http://algos.altervista.org/algoscl.php";
 const timeout = 3000;	//3 sec
 
 function getFuncUrl(funcName){
