@@ -3,6 +3,7 @@ namespace algos\server\factory;
 
 use algos\server\dbprovider\DbProvider;
 use algos\server\entity\Utente;
+use DateTime;
 require_once __DIR__ . '/../required/autoload.php';
 
 session_start();
@@ -29,7 +30,19 @@ class UtenteProvider extends AbstractProvider {
         return false;
     }
 
-    public function login(string $email, string $key): bool {
+    public function loginByCookie(string $em, string $ky): bool {
+        if (! $this->login($em, $ky, true)) {
+            unset($_COOKIE['_em']);
+            unset($_COOKIE['_ky']);
+            
+            setcookie('_em', '', time() - 3600, '/');
+            setcookie('_ky', '', time() - 3600, '/');
+            return false;
+        }
+        return true;
+    }
+
+    public function login(string $email, string $key, bool $rememberMe): bool {
         $users = DbProvider::instance()->selectWhereClause(new Utente(),
             array(
                 
@@ -40,13 +53,28 @@ class UtenteProvider extends AbstractProvider {
             $keyS = md5(
                 $user->getEmail() . $user->getToken() . $user->getPassword());
             if ($keyS === $key) {
-                //aggiorno il token
+                // aggiorno il token
                 $oldUser = clone $user;
                 $user->increaseToken();
-                UtenteProvider::instance()->updateUtente($oldUser, $user);
+                $uu = UtenteProvider::instance()->updateUtente($oldUser, $user);
                 
-                //imposto la sessione
+                // imposto la sessione
                 $_SESSION['user'] = $user;
+                
+                // imposto i cookies
+                if ($rememberMe) {
+                    setcookie("_em", $email,
+                        (new DateTime("now"))->modify('tomorrow')->getTimestamp(),
+                        "/");
+//                     $nextkey = md5(
+//                         $user->getEmail() . $user->getToken() .
+//                         $user->getPassword());
+                    $nextkey = $keyS;
+                    //TODO risolvi aggiornamento token non funzionante
+                    setcookie("_ky", $nextkey,
+                        (new DateTime("now"))->modify('tomorrow')->getTimestamp(),
+                        "/");
+                }
                 return true;
             }
         }
@@ -59,14 +87,14 @@ class UtenteProvider extends AbstractProvider {
         else
             return null;
     }
-    
-    public function refreshLoggedUser() : bool{
-        if($this->getLoggedUser() != null){
+
+    public function refreshLoggedUser(): bool {
+        if ($this->getLoggedUser() != null) {
             $up = $this->getUtenteFromEmail($_SESSION['user']->getEmail());
             $_SESSION['user'] = $up;
             
             return true;
-        }else
+        } else
             return false;
     }
 
@@ -86,9 +114,18 @@ class UtenteProvider extends AbstractProvider {
     public function logout(): bool {
         if ($this->getLoggedUser() === null)
             return false;
-        //$su = session_unset();
+        
+        // distruggo i cookies
+        unset($_COOKIE['_em']);
+        unset($_COOKIE['_ky']);
+        
+        setcookie('_em', '', time() - 3600, '/');
+        setcookie('_ky', '', time() - 3600, '/');
+        
+        // $su = session_unset();
         $su = true;
         $sd = session_destroy();
+        
         return (($su && $sd) ? true : false);
     }
 

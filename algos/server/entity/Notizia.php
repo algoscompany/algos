@@ -155,5 +155,9 @@ class Notizia extends Entity {
             "idDomanda" => $this->idDomanda
         );
     }
+    
+    public function __toString(){
+        return $this->getIdNotizia();
+    }
 }
 

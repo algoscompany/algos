@@ -1,12 +1,12 @@
 <?php
 namespace algos\server\factory;
 
+use algos\server\config\Configuration;
 use algos\server\dbprovider\DbProvider;
 use algos\server\entity\Domanda;
 use algos\server\entity\Notizia;
 use algos\server\entity\Risposta;
 use algos\server\entity\Utente;
-use algos\server\config\Configuration;
 require_once __DIR__ . '/../required/autoload.php';
 
 class NotiziaProvider extends AbstractProvider {
@@ -61,8 +61,15 @@ class NotiziaProvider extends AbstractProvider {
         $fill = $this->getNotizieStress();
         
         $notizie = array_merge($notizieToShow, $fill);
-        array_unique($notizie, SORT_REGULAR);
-        return $notizie;
+        
+        $known = array();
+        $filtered = array_filter($notizie, function ($val) use (&$known) {
+            $unique = !in_array($val->getIdNotizia(), $known);
+            $known[] = $val->getIdNotizia();
+            return $unique;
+        });
+        
+        return $filtered;
     }
 
     private function getMediaRispostePerDomanda(Utente $u): array {

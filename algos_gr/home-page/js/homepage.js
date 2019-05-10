@@ -105,7 +105,7 @@ async function initNewsCarousel(){
 					key +
 				'</h4>'+
 				'<div class="container">'+
-					'<div class="card-columns text-center">'+
+					'<div class="card-columns">'+
 						cts +
 					'</div>'+
 				'</div>'+

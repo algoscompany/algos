@@ -152,7 +152,7 @@ class RispostaProvider extends AbstractProvider {
         }
         
         $eustress = $XW / $W;
-        return ($eustress / 5) * 100;
+        return round((($eustress / 5) * 100), 0);
     }
 }
 

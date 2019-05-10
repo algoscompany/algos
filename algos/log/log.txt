@@ -1,0 +1,2 @@
+[10-May-2019 17:32:41] [localhost/algos/server/gateway/gateway.php?funcName=login] : [DEBUG] - UPDATE Utente SET email = 'pietrosassoli22@gmail.com',nome = 'Pietro',cognome = 'Sassoli',password = 'e2fc714c4727ee9395f324cd2e7f331f',eustress = '68.8095',ruolo = '0',token = '6' WHERE email = 'pietrosassoli22@gmail.com' AND nome = 'Pietro' AND cognome = 'Sassoli' AND password = 'e2fc714c4727ee9395f324cd2e7f331f' AND eustress = '68.8095' AND ruolo = '0' AND token = '5' 
+[10-May-2019 17:32:41] [localhost/algos/server/gateway/gateway.php?funcName=login] : [DEBUG] - 1

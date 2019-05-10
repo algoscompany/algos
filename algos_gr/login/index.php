@@ -3,6 +3,8 @@
 <?php
 	include_once "../../algos/client/access_control.php";
 	ac_already_logged();
+	if(checkCookies())
+		header("location: " . getAlgosLink('home-page'));
 ?>
 
 <html>
@@ -56,8 +58,8 @@
 		   	   	<div>
 		   	        <!-- Remember me -->
 		   	        <div class="custom-control custom-checkbox">
-		   	            <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember" name="cookie">
-		   	            <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+		   	            <input type="checkbox" class="custom-control-input" id="rememberMeButton" name="cookie" checked>
+		   	            <label class="custom-control-label" for="rememberMeButton">Remember me</label>
 		   	        </div>
 		   	    </div>
 		   	    <div>

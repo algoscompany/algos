@@ -23,8 +23,9 @@ function login(string $json) { // OK
     $val = json_decode($json);
     $email = $val->email;
     $key = $val->key;
+    $rememberMe = $val->rememberMe;
     
-    if (UtenteProvider::instance()->login($email, $key)) {
+    if (UtenteProvider::instance()->login($email, $key, $rememberMe)) {
         $res = array(
             "result" => "ok"
         );

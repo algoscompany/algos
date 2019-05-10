@@ -28,10 +28,12 @@ function checkLogin(){
 
 	if((em != null) && (pw != null)){
 		let key = CryptoJS.MD5(em + getToken() + CryptoJS.MD5(pw).toString()).toString();
+		let remMe = $('#rememberMeButton').prop("checked");
 		let json = JSON.stringify(
 			{
 				'email': em,
-				'key': key
+				'key': key,
+				'rememberMe' : remMe
 			}
 		);
 

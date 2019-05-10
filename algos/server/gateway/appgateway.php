@@ -15,3 +15,8 @@ function getWsf($limit){
 // function calcEu(){
 //     echo RispostaProvider::instance()->calcEustressForUtente(new Utente("pappa@gmail.com", "1234"));
 // }
+
+function printUserCookies(){
+    echo $_COOKIE['_em']."<br/>";
+    echo $_COOKIE['_ky'];
+}

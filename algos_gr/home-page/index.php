@@ -78,10 +78,7 @@
 		    <div class="col">
 					<blockquote class="blockquote bq-warning wholesome quote mb-3">
 					  <p class="bq-title ">News of the day</p>
-					  <p  id="wholesomefacts">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores quibusdam dignissimos itaque harum illo!
-					    Quidem, corporis at quae tempore nisi impedit cupiditate perferendis nesciunt, ex dolores doloremque!
-					    Sit, rem, in?
-					  </p>
+					  <p  id="wholesomefacts"></p>
 						<footer class="blockquote-footer mb-3 text-right">Wholesome Facts da catfact.ninja</footer>
 					</blockquote>
 					<div class="container main-menu text-center">
