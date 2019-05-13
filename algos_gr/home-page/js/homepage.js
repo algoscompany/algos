@@ -21,7 +21,8 @@ async function logout(){
 }
 
 async function getUtenteInfo(u){
-	if(utenteInfo == null || u == true){
+	if(utenteInfo == null || u == 'get'){
+		console.log(u);
 		await getResource("getUtenteInfo")
 		.then((json) => {
 			let obj = JSON.parse(json);
@@ -65,7 +66,7 @@ async function setChart(){
 }
 
 async function updateChart(){
-	await getUtenteInfo(true);
+	await getUtenteInfo('get');
 	setChart();
 }
 

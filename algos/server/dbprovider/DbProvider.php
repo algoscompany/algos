@@ -3,7 +3,6 @@ namespace algos\server\dbprovider;
 
 use algos\server\config\Configuration;
 use algos\server\entity\Entity;
-use algos\server\logger\Logger;
 use Exception;
 use mysqli;
 require_once __DIR__ . '/../required/autoload.php';
@@ -120,7 +119,6 @@ class DbProvider implements DbProviderInterface {
                 $sql .= $k . " = '" . $v . '\' AND ';
         }
         $sql = substr($sql, 0, - 4);
-
         return ($this->connection->query($sql) ? true : false);
     }
 

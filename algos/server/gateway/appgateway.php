@@ -1,5 +1,8 @@
 <?php
 
+use algos\server\entity\Utente;
+use algos\server\factory\RispostaProvider;
+
 require "../../client/links.php";
 
 function getLink($name){
@@ -12,9 +15,9 @@ function getWsf($limit){
 }
 
 // SOLO PER DEBUG
-// function calcEu(){
-//     echo RispostaProvider::instance()->calcEustressForUtente(new Utente("pappa@gmail.com", "1234"));
-// }
+function calcEu(){
+    echo RispostaProvider::instance()->calcEustressForUtente(new Utente("pappa@gmail.com", ""));
+}
 
 function printUserCookies(){
     echo $_COOKIE['_em']."<br/>";
