@@ -1,3 +1,6 @@
+<?php
+  include "algos/client/links.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,20 +14,20 @@
     <title>Algos Landing Page</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="landing/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+    <link href="landing/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="landing/vendor/simple-line-icons/css/simple-line-icons.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
 
     <!-- Plugin CSS -->
-    <link rel="stylesheet" href="device-mockups/device-mockups.min.css">
+    <link rel="stylesheet" href="landing/device-mockups/device-mockups.min.css">
 
     <!-- Custom styles for this template -->
-    <link href="css/new-age.min.css" rel="stylesheet">
+    <link href="landing/css/new-age.min.css" rel="stylesheet">
 
   </head>
 
@@ -46,6 +49,9 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="<?php echo getAlgosLink("login"); ?>">LOGIN</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -56,8 +62,8 @@
         <div class="row h-100">
           <div class="col-lg-7 my-auto">
             <div class="header-content mx-auto">
-              <h1 class="mb-5">New Age is an app landing page that will help you beautifully showcase your new mobile app, or anything else!</h1>
-              <a href="#download" class="btn btn-outline btn-xl js-scroll-trigger" style="border-color: #fdcc52">Start Now for Free!</a>
+              <h1 class="mb-5">Algos is a web app that will help you manage your stress in the best and fun way!</h1>
+              <a href="<?php echo getAlgosLink("sign-up"); ?>" class="btn btn-outline btn-xl js-scroll-trigger" style="border-color: #fdcc52">Start Now for Free!</a>
             </div>
           </div>
           <div class="col-lg-5 my-auto">
@@ -168,9 +174,9 @@
               <i class="fab fa-facebook-f"></i>
             </a>
           </li>
-          <li class="list-inline-item social-google-plus">
+          <li class="list-inline-item social-instagram">
             <a href="#">
-              <i class="fab fa-google-plus-g"></i>
+              <i class="fab fa-instagram"></i>
             </a>
           </li>
         </ul>
@@ -195,14 +201,14 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="landing/vendor/jquery/jquery.min.js"></script>
+    <script src="landing/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="landing/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="js/new-age.min.js"></script>
+    <script src="landing/js/new-age.min.js"></script>
 
   </body>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <?php
-	include_once "../../algos/client/access_control.php";
+	include_once "../algos/client/access_control.php";
 	ac_require_login();
 ?>
 

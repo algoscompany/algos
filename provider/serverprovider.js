@@ -1,4 +1,4 @@
-const urlHost = "http://localhost/algos/server/gateway/gateway.php";
+const urlHost = "http://192.168.0.114/algos/server/gateway/gateway.php";
 const timeout = 3000;	//3 sec
 
 function getFuncUrl(funcName){

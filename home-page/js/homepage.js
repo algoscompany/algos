@@ -10,7 +10,7 @@ async function logout(){
 	.then((json) => {
 		let res = JSON.parse(json).result;
 		if(res == "ok"){
-			redirectPage("login");
+			redirectPage("landing");
 		}
 		else
 			alert("Logout non eseguito");

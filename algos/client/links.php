@@ -1,11 +1,12 @@
 <?php
   const links = array(
-    "urlHost"=> "http://localhost",
+    "urlHost"=> "http://192.168.0.114",
+    "landing" => "",
     "clientPage"=> "algoscl.php",
-  	"login"=> "/algos_gr/login/",
-    "sign-up"=> "/algos_gr/sign-up/",
-  	"home-page"=> "/algos_gr/home-page/",
-    "account"=> "/algos_gr/account/",
+  	"login"=> "/login/",
+    "sign-up"=> "/sign-up/",
+  	"home-page"=> "/home-page/",
+    "account"=> "/account/",
     "forgotPassword"=> ""
   );
 
