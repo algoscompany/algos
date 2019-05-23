@@ -36,8 +36,8 @@
 
 
 		  <div class="row">
-		    <div class="col graphics">
-					<nav class="mb-1 navbar navbar-expand-lg navbar-dark menù mb-4">
+		    <div class="col graphics" id="menu">
+					<nav class="mb-1 navbar navbar-expand-lg navbar-dark menu mb-4">
 						<a class="navbar-brand" href="#">Algos</a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
 							aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">

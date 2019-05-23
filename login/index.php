@@ -31,7 +31,7 @@
 
 		<form class="p-5 form-login" onsubmit="return checkLogin();" action="" autocomplete="off">
 
-		    <p class="h4 mb-4 text-center" style="color: white;">Login</p>
+		    <p class="h4 mb-4 text-center" style="color: white;"><a href="<?php echo getAlgosLink('landing'); ?>" style="font-size: 25px;"><i class="fas fa-brain"></i></a> Login</p>
 
 
 		    <div class="container" style="text-align: left; color: white;">

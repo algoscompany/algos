@@ -1,5 +1,7 @@
 <?php
-  include "algos/client/links.php";
+  include "algos/client/access_control.php";
+
+  ac_already_logged();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Algos Landing Page</title>
+    <title>Algos</title>
 
     <!-- Bootstrap core CSS -->
     <link href="landing/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -62,8 +64,9 @@
         <div class="row h-100">
           <div class="col-lg-7 my-auto">
             <div class="header-content mx-auto">
-              <h1 class="mb-5">Algos is a web app that will help you manage your stress in the best and fun way!</h1>
-              <a href="<?php echo getAlgosLink("sign-up"); ?>" class="btn btn-outline btn-xl js-scroll-trigger" style="border-color: #fdcc52">Start Now for Free!</a>
+              <h1 class="mb-3">Algos, an app for yourself.</h1>
+              <h2 class="mb-5">Algos is a web app that will help you manage your stress in the best and fun way!</h2>
+              <a href="<?php echo getAlgosLink("sign-up"); ?>" class="btn btn-outline btn-xl js-scroll-trigger" style="border-color: #fdcc52">Start Now. It's free!</a>
             </div>
           </div>
           <div class="col-lg-5 my-auto">
@@ -72,10 +75,7 @@
                 <div class="device">
                   <div class="screen">
                     <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                    <img src="img/demo-screen-1.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="button">
-                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                    <img src="landing/img/loader.gif" class="img-fluid" alt="">
                   </div>
                 </div>
               </div>
@@ -99,10 +99,7 @@
                 <div class="device">
                   <div class="screen">
                     <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                    <img src="img/demo-screen-1.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="button">
-                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                    <img src="landing/img/home-demo.png" class="img-fluid" alt="">
                   </div>
                 </div>
               </div>
@@ -152,7 +149,7 @@
       <div class="cta-content">
         <div class="container">
           <h2>Stop waiting.<br>Carpe diem!</h2>
-          <a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger">Let's Get Started!</a>
+          <a href="<?php echo getAlgosLink("sign-up"); ?>" class="btn btn-outline btn-xl">Let's Get Started!</a>
         </div>
       </div>
       <div class="overlay"></div>
@@ -160,9 +157,7 @@
 
     <section class="contact bg-primary" id="contact">
       <div class="container">
-        <h2>We
-          <i class="fas fa-heart"></i>
-          new friends!</h2>
+        <h2>We <i class="fas fa-heart"></i> new friends!</h2>
         <ul class="list-inline list-social">
           <li class="list-inline-item social-twitter">
             <a href="#">
@@ -186,7 +181,7 @@
     <footer>
       <div class="container">
         <p>&copy; Algos 2018 | 2019. All Rights Reserved.</p>
-        <ul class="list-inline">
+        <!-- <ul class="list-inline">
           <li class="list-inline-item">
             <a href="#">Privacy</a>
           </li>
@@ -196,7 +191,7 @@
           <li class="list-inline-item">
             <a href="#">FAQ</a>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </footer>
 

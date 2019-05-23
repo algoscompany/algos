@@ -2,7 +2,7 @@ var ctxD = document.getElementById("doughnutChart").getContext('2d');
 var myLineChart = new Chart(ctxD, {
   type: 'doughnut',
   data: {
-    labels: ["EUSTRESS", "DISTRESS"],
+    labels: ["EUSTRESS, lo stress buono", "DISTRESS, lo stress cattivo"],
     datasets: [{
       data: [40,60],
       backgroundColor: ["#d35400", "#2c3e50"],
@@ -11,9 +11,15 @@ var myLineChart = new Chart(ctxD, {
   },
   options: {
     responsive: true
+  },
+  tooltip: {
+    callback: {
+      title: function(tooltipItem, chart) {
+              return 'dsklfjjdklsfjj';
+          }
+    }
   }
 });
-
 
 var ctxL = document.getElementById("lineChart").getContext('2d');
 var myLineChart1 = new Chart(ctxL, {

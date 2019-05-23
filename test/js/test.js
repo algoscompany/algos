@@ -64,6 +64,7 @@ async function commitTest(){
 				$('#testModal').modal('hide');
 				setTestEffettuato();
 				updateChart();
+				initNewsCarousel('get');
 			}
 		})
 		.catch((err) => {

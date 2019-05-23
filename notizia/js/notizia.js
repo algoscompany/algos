@@ -5,13 +5,15 @@ function openNotizia(id){
   });
   getResource("getNotizia", json)
   .then((json) => {
+    console.log(json);
     let obj = JSON.parse(json);
     if(obj != null){
       $('#notiziaTitolo').text(obj['titolo']);
       $('#notiziaFonte').text(obj['fonte']);
       $('#notiziaCategoria').text(obj['categoria']);
 
-      if(obj['corpo'] != "")
+      $('#notiziaCorpo').empty();
+      if(obj['corpo'] != null && obj['corpo'] != "")
         $('#notiziaCorpo').text(obj['corpo']);
       else
         $('<iframe src="' + obj['link'] + '" '+

@@ -22,7 +22,6 @@ async function logout(){
 
 async function getUtenteInfo(u){
 	if(utenteInfo == null || u == 'get'){
-		console.log(u);
 		await getResource("getUtenteInfo")
 		.then((json) => {
 			let obj = JSON.parse(json);
@@ -37,8 +36,8 @@ async function getUtenteInfo(u){
 	return utenteInfo;
 }
 
-async function getNews(){
-	if(news == null){
+async function getNews(u){
+	if(news == null || u == 'get'){
 		await getResource("getOverviewNotizie")
 		.then((json) => {
 			let obj = JSON.parse(json);
@@ -81,9 +80,9 @@ async function setNavBar(){
 	}
 }
 
-async function getNewsByCategoria(){
-	if(newsByCategoria == null){
-		let anews = await getNews();
+async function getNewsByCategoria(u){
+	if(newsByCategoria == null || u == 'get'){
+		let anews = await getNews(u);
 		let cat = new Array();
 		anews.forEach(function(entry){
 //		if(!cat.includes(entry["categoria"])){
@@ -97,8 +96,8 @@ async function getNewsByCategoria(){
 	return newsByCategoria;
 }
 
-async function initNewsCarousel(){
-	let arr = await getNewsByCategoria();
+async function initNewsCarousel(u){
+	let arr = await getNewsByCategoria(u);
 	for(let key in arr) {
 		let cts = cardToString(arr[key]);
 		$('<div class="carousel-item">'+
