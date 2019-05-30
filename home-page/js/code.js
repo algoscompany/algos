@@ -11,13 +11,6 @@ var myLineChart = new Chart(ctxD, {
   },
   options: {
     responsive: true
-  },
-  tooltip: {
-    callback: {
-      title: function(tooltipItem, chart) {
-              return 'dsklfjjdklsfjj';
-          }
-    }
   }
 });
 

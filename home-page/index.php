@@ -68,11 +68,22 @@
 							</ul>
 						</div>
 					</nav>
-					<div class="doughnut">
-						<canvas id="doughnutChart" style="margin-bottom: 10px;"></canvas>
+					<div class="d-flex justify-content-center">
+						<div class="doughnut mt-2">
+							<canvas id="doughnutChart" style="margin-bottom: 10px;"></canvas>
+						</div>
 					</div>
-					<div class="line">
-						<canvas id="lineChart"></canvas>
+					<div class="d-flex justify-content-center">
+						<div class="line mt-2">
+							<canvas id="lineChart"></canvas>
+						</div>
+					</div>
+					<div class="d-flex justify-content-center">
+						<div class="jumbotron mt-4">
+						  <div class="container" id="music">
+
+						  </div>
+						</div>
 					</div>
 		    </div>
 		    <div class="col">

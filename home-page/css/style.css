@@ -56,6 +56,10 @@ body{
 	width: 100%;
 }
 
+.jumbotron{
+	width: 70%;
+}
+
 .music{
 	position: relative;
 	width: 100%;
