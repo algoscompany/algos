@@ -135,6 +135,18 @@ function getUtenteInfo() { // OK
     echo json_encode($array);
 }
 
+function getUserStatistics(){
+    $user = UtenteProvider::instance()->getLoggedUser();
+    if($user != null){
+        $res = RispostaProvider::instance()->getStatForUser($user->getEmail());
+        if($res != null)
+            echo json_encode($res);
+        else 
+            echo json_encode(array("EMPTY"));
+    }else
+        echo json_encode(array("NULL"));
+}
+
 function updateUtente($json) {
     $var = json_decode($json);
     $email = $var->email;

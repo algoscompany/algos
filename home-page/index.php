@@ -92,24 +92,26 @@
 					  <p  id="wholesomefacts"></p>
 						<footer class="blockquote-footer mb-3 text-right">Wholesome Facts da catfact.ninja</footer>
 					</blockquote>
-					<div class="container main-menu text-center">
-						<div class="carousel slide top" data-ride="carousel" id="news-carousel">	<!--data-interval="false" per mantenere fermo il carousel in fase di sviluppo-->
-							<!-- indicators -->
-							<ol class="carousel-indicators"></ol>
-							<!-- wrapper for slides -->
-						  <div class="carousel-inner"></div>
-							<!-- controls -->
-						  <a class="carousel-control-prev" href="#news-carousel" role="button" data-slide="prev">
-						    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						    <span class="sr-only">Previous</span>
-						  </a>
-						  <a class="carousel-control-next" href="#news-carousel" role="button" data-slide="next">
-						    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-						    <span class="sr-only">Next</span>
-						  </a>
-						</div>
-						<footer class="blockquote-footer mb-3 text-right">Immagini da Unsplash.com</footer>
-				</div>
+					<div class="d-flex justify-content-center">
+						<div class="container main-menu text-center">
+							<div class="carousel slide top" data-ride="carousel" id="news-carousel" data-interval="false">	<!--data-interval="false" per mantenere fermo il carousel in fase di sviluppo-->
+								<!-- indicators -->
+								<ol class="carousel-indicators"></ol>
+								<!-- wrapper for slides -->
+							  <div class="carousel-inner"></div>
+								<!-- controls -->
+							  <a class="carousel-control-prev" href="#news-carousel" role="button" data-slide="prev">
+							    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							    <span class="sr-only">Previous</span>
+							  </a>
+							  <a class="carousel-control-next" href="#news-carousel" role="button" data-slide="next">
+							    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+							    <span class="sr-only">Next</span>
+							  </a>
+							</div>
+							<footer class="blockquote-footer mb-3 text-right">Immagini da Unsplash.com</footer>
+					</div>
+					</div>
 		    </div>
 		  </div>
 

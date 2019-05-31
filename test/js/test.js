@@ -65,6 +65,7 @@ async function commitTest(){
 				setTestEffettuato();
 				updateChart();
 				initNewsCarousel('get');
+				getLinearChart('get');
 			}
 		})
 		.catch((err) => {

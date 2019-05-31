@@ -83,6 +83,39 @@ class RispostaProvider extends AbstractProvider {
             ));
     }
 
+    public function getStatForUser(string $email) {
+        /**
+         * Restituisce gli ultimi 7 giorni
+         */
+        if ($email != null) {
+            $res = DbProvider::instance()->selectWhereClause(new Risposta(), array(
+                "idUtente = '" . $email . "'"
+            ));
+            
+            if($res != null){
+                $arr = array();
+                foreach($res as $r){
+                    $arr[$r->getData()->format("Y-m-d")][] = $r->getPunteggio();
+                }
+                foreach($arr as $k => $a){
+                    $sum = 0;
+                    $count = 0;
+                    foreach($a as $i){
+                        $sum = $sum + $i;
+                        $count++;
+                    }
+                    if($count != 0)
+                        $arr[$k] = round($sum / $count, 2);
+                    else
+                        $arr[$k] = 0;
+                }
+            }
+            return $arr;
+        }
+        else
+            return null;
+    }
+
     public function isTestEffettuatoOggi(): bool {
         $usr = UtenteProvider::instance()->getLoggedUser();
         if ($usr != null) {
@@ -164,7 +197,7 @@ class RispostaProvider extends AbstractProvider {
                 return round((($eustress / 5) * 100), 0);
             } else
                 return 0;
-        }else
+        } else
             return 0;
     }
 }

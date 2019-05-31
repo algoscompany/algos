@@ -76,7 +76,7 @@ class DbProvider implements DbProviderInterface {
         $sql = substr($var, 0, - 4); // elimina l'AND finale
         
         $res = $this->connection->query($sql);
-        // echo $sql;
+        //Logger::instance()->debug($sql);
         $arr = array();
         while ($obj = $res->fetch_object($T->getClassName())) {
             $arr[] = $obj;

@@ -1,7 +1,8 @@
 var utenteInfo = null;
 var news = null;
 var newsByCategoria = null;
-const nloadfuncs = 3;
+var linearChartData = null;
+const nloadfuncs = 4;
 var loadedfunc = 0;
 //getUtenteInfo();	//risolvo immediatamente le info dell'utente
 
@@ -52,6 +53,27 @@ async function getNews(u){
 	return news;
 }
 
+async function getLinearChart(u){
+	if(linearChartData == null || u == 'get'){
+		await getResource("getUserStatistics")
+		.then((json) => {
+			let obj = JSON.parse(json);
+			if(obj != null || obj != "EMPTY" || obj != "NULL"){
+				linearChartData = obj;
+
+				myLinearChart.data.labels = Object.keys(linearChartData);
+				myLinearChart.data.datasets[0].data = Object.values(linearChartData);
+				myLinearChart.update();
+
+				incLoadedFunc();
+			}
+		})
+		.catch((err) => {
+			console.error(err);
+		})
+	}
+	return linearChartData;
+}
 
 async function setChart(){
 	let obj = await getUtenteInfo();
@@ -144,6 +166,7 @@ function initHomePage(){
 	setChart();
 	setNavBar();
 	initNewsCarousel();
+	getLinearChart();
 	//non necessarie alla visualizzazione della pagina:
 	initWsf();
 }
